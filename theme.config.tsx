@@ -15,6 +15,7 @@ const template = siteTemplate({
   github: 'mrjvs/neatojs',
   dropdown: [link('Guider', '/docs/guider'), link('Config', '/docs/config')],
   navigation: [link('Showcase', '/showcase')],
+  tabs: [link('Showcase', '/showcase')],
   settings: {
     colors: {
       primary: '#A880FF',
@@ -43,6 +44,7 @@ const template = siteTemplate({
 });
 
 const gdApi = (url: string) => `/docs/guider/api-reference${url}`;
+
 export default defineTheme([
   site('main', {
     extends: [template],

@@ -6,7 +6,7 @@ export function Logo() {
       href="/"
       className="active:scale-105 hover:bg-bgLightest font-bold text-textHeading flex items-center rounded-md p-2 -ml-2 transition-[background-color,transform] duration-100"
     >
-      <img src="/logo.svg" className="h-8 mr-2" /> NeatoJS
+      <img src="/logo.svg" className="h-8 mr-2" height="40" width="40" /> NeatoJS
     </Link>
   );
 }
