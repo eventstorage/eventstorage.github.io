@@ -20,15 +20,40 @@ const siteTemplate = site('docs', {
     separator(),
   ],
   github: 'eventstorage/eventstorage',
+  tabs: [
+    link("Documentation", "/link/a"),
+    link("API reference", "/link/b"),
+    link("API reference", "/link/b"),
+    // component(() => <p>Custom component</p>),
+  ]
 });
 
 export default defineTheme([
+  site('main', {
+    extends: [siteTemplate],
+    directories: [
+      directory('ref', {
+        // sidebar: [
+        //   // link('The API reference', '/api-ref/'),
+        //   // link('Other info', '/api-ref/other'),
+        // ],
+      }),
+    ],
+  }),
   site('docs', {
     extends: [siteTemplate],
-    meta: () => <></>,
+    meta: {
+      titleTemplate: "%s - Guider",
+      openGraph: {
+        type: 'website',
+        url: 'https://www.example.com/page',
+        title: 'My site',
+        description: 'My description'
+      }
+    },
     contentFooter: {
       socials: [],
-      text: 'Copyright (c) 2023',
+      text: 'Copyright (c) 2024',
       editRepositoryBase: 'https://github.com/eventstorage/eventstorage',
     },
     pageFooter: {
@@ -97,17 +122,6 @@ export default defineTheme([
         sidebar: [
           link('The misc', '/docs/misc/'),
           link('The cure', '/docs/misc/the-cure'),
-        ],
-      }),
-    ],
-  }),
-  site('api-ref', {
-    extends: [siteTemplate],
-    directories: [
-      directory('ref', {
-        sidebar: [
-          link('The API reference', '/api-ref/'),
-          link('Other info', '/api-ref/other'),
         ],
       }),
     ],
