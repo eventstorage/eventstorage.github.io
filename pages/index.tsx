@@ -8,7 +8,7 @@ import {
  
 export default function LandingPage() {
   return (
-    <GuiderLayout meta={{ site: 'docs' }}>
+    <GuiderLayout meta={{ site: 'main' }}>
       <Hero>
         <Hero.Badge title="V1.0.0" to="/docs/guider/guides">
           Just went out of alpha!

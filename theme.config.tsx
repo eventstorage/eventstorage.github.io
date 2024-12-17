@@ -4,6 +4,7 @@ import {
   group,
   link,
   site,
+  separator,
   siteTemplate,
   social,
   type SiteComponent,
@@ -11,11 +12,11 @@ import {
 import { Logo } from './components/logo';
 
 
-const template = siteTemplate({
+const template = site('my-site', {
   github: 'mrjvs/neatojs',
-  dropdown: [link('Guider', '/docs/guider'), link('Config', '/docs/config')],
+  dropdown: [link('v0.0.0-beta.12', '/docs/guider'), link('v0.0.0-beta.13', '/docs/config')],
   navigation: [link('Showcase', '/showcase')],
-  tabs: [link('Showcase', '/showcase')],
+  tabs: [link('Documentation', '/docs'), link('Api reference', '/api-refs')],
   settings: {
     colors: {
       primary: '#A880FF',
@@ -43,7 +44,6 @@ const template = siteTemplate({
   },
 });
 
-const gdApi = (url: string) => `/docs/guider/api-reference${url}`;
 
 export default defineTheme([
   site('main', {
@@ -59,7 +59,7 @@ export default defineTheme([
     ],
     logo: () => <Logo />,
   }),
-  site('docs', {
+  site('site-a', {
     extends: [template],
     meta: {
       titleTemplate: "%s - Guider",
@@ -99,7 +99,7 @@ export default defineTheme([
             link('Guides', '/docs/guides/'),
             link('How to?', '/docs/guides/how-to'),
           ]),
-          link('separator()', gdApi('/theme/separator')),
+          separator(),
           link.nested('Troubleshooting', '/docs/guides/troubleshooting', [
             link('Guides', '/docs/guides/'),
             link('How to?', '/docs/guides/how-to'),
