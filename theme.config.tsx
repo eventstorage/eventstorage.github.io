@@ -1,36 +1,52 @@
 import {
-  component,
   defineTheme,
   directory,
   group,
   link,
-  separator,
   site,
+  siteTemplate,
+  social,
   type SiteComponent,
 } from '@neato/guider/theme';
+import { Logo } from './components/logo';
 
-const siteTemplate = site('docs', {
-  dropdown: [
-    link('Documentation', '/docs/guides', { icon: 'fa6-solid:house' }),
-    link('API reference', '/api-ref'),
-  ],
-  navigation: [
-    link('Documentation', '/docs/guides', { icon: 'fa6-solid:house' }),
-    link('API reference', '/api-ref'),
-    separator(),
-  ],
-  github: 'eventstorage/eventstorage',
-  tabs: [
-    link("Documentation", "/link/a"),
-    link("API reference", "/link/b"),
-    link("API reference", "/link/b"),
-    // component(() => <p>Custom component</p>),
-  ]
+
+const template = siteTemplate({
+  github: 'mrjvs/neatojs',
+  dropdown: [link('Guider', '/docs/guider'), link('Config', '/docs/config')],
+  navigation: [link('Showcase', '/showcase')],
+  settings: {
+    colors: {
+      primary: '#A880FF',
+      primaryDarker: '#6C3DD0',
+      primaryLighter: '#D0BAFF',
+    },
+    backgroundPattern: 'flare',
+    logo: () => <Logo />,
+  },
+  contentFooter: {
+    editRepositoryBase: 'https://github.com/mrjvs/neatojs/tree/dev/apps/docs',
+    socials: [
+      social.discord('https://discord.gg/cGd5pKxWyK'),
+      social.github('https://github.com/mrjvs/neatojs'),
+    ],
+  },
+  meta: {
+    titleTemplate: '%s - NeatoJS',
+    additionalLinkTags: [
+      {
+        rel: 'icon',
+        href: '/favicon.png',
+      },
+    ],
+  },
 });
 
+const gdApi = (url: string) => `/docs/guider/api-reference${url}`;
 export default defineTheme([
   site('main', {
-    extends: [siteTemplate],
+    extends: [template],
+    // logo: () => <img src="vercel.svg" width="50" height="50"></img>,
     directories: [
       directory('ref', {
         // sidebar: [
@@ -39,9 +55,10 @@ export default defineTheme([
         // ],
       }),
     ],
+    logo: () => <Logo />,
   }),
   site('docs', {
-    extends: [siteTemplate],
+    extends: [template],
     meta: {
       titleTemplate: "%s - Guider",
       openGraph: {
@@ -80,7 +97,7 @@ export default defineTheme([
             link('Guides', '/docs/guides/'),
             link('How to?', '/docs/guides/how-to'),
           ]),
-          separator(),
+          link('separator()', gdApi('/theme/separator')),
           link.nested('Troubleshooting', '/docs/guides/troubleshooting', [
             link('Guides', '/docs/guides/'),
             link('How to?', '/docs/guides/how-to'),
@@ -105,17 +122,6 @@ export default defineTheme([
           link('CLI A', '/docs/cli/cli-a'),
           link('CLI B', '/docs/cli/cli-b'),
           link('David Tennant', '/docs/cli/tennant'),
-          component(() => (
-            <div
-              style={{
-                backgroundColor: '#000',
-                padding: 16,
-                borderRadius: 7,
-              }}
-            >
-              Custom component
-            </div>
-          )),
         ],
       }),
       directory('misc', {
