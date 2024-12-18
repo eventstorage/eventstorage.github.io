@@ -13,10 +13,10 @@ import { Logo } from './components/logo';
 
 
 const template = site('eventstorage', {
-  github: 'mrjvs/neatojs',
+  github: 'eventstorage/eventstorage',
   dropdown: [link('v0.0.0-beta.12', '/docs/guider'), link('v0.0.0-beta.13', '/docs/config')],
   navigation: [link('Showcase', '/showcase')],
-  tabs: [link('Documentation', '/docs'), link('Api reference', '/api-refs')],
+  tabs: [link('Documentation', '/docs'), link('Learning', '/api-refs')],
   settings: {
     colors: {
       primary: '#A880FF',
@@ -27,10 +27,10 @@ const template = site('eventstorage', {
     logo: () => <Logo />,
   },
   contentFooter: {
-    editRepositoryBase: 'https://github.com/mrjvs/neatojs/tree/dev/apps/docs',
+    editRepositoryBase: 'https://github.com/eventstorage/eventstorage/docs',
     socials: [
       social.discord('https://discord.gg/cGd5pKxWyK'),
-      social.github('https://github.com/mrjvs/neatojs'),
+      social.github('https://github.com/eventstorage/eventstorage'),
     ],
   },
   meta: {

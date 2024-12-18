@@ -1,3 +1,35 @@
+# Landing page
+
+Landing pages are a good way to introduce your project without going directly into the documentation.
+On this page you will learn how to make a landing page or use a preset.
+
+
+## Creating a basic landing page
+
+To make a landing page (or any page that isn't MDX for that matter), you will first need to wrap it in a `<GuiderLayout />{:tsx}` component.
+
+If you want the layout to belong to a specific layout or site, you can specify it the `meta` prop - this is completely optional. It accepts the same data as the Frontmatter from a page.
+
+```tsx title="index.tsx" showLineNumbers
+import { GuiderLayout } from '@neato/guider/client';
+
+export default function LandingPage() {
+  return (
+    <GuiderLayout meta={{ site: 'my-site' }}>
+      <p>My page goes here</p>
+    </GuiderLayout>
+  );
+}
+```
+
+You can add any content you need inside of the `<GuiderLayout />{:tsx}` component.
+
+
+## Use premade landing page
+
+In the case that you don't want to put in extra effort into making a landing page, you can opt for using our premade landing page:
+
+```tsx title="index.tsx" showLineNumbers {12-38}
 import {
   Button,
   Card,
@@ -5,10 +37,10 @@ import {
   GuiderLayout,
   Hero,
 } from '@neato/guider/client';
- 
+
 export default function LandingPage() {
   return (
-    <GuiderLayout meta={{ site: 'home' }}>
+    <GuiderLayout meta={{ site: 'my-site' }}>
       <Hero>
         <Hero.Badge title="V1.0.0" to="/docs/guider/guides">
           Just went out of alpha!
@@ -39,3 +71,8 @@ export default function LandingPage() {
     </GuiderLayout>
   );
 }
+```
+
+<Important>
+  when making non-MDX pages, make sure you put it in a `.tsx` file instead of a `.mdx` file.
+</Important>
