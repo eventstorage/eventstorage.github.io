@@ -11,7 +11,7 @@ import {
 import { Logo } from 'components/logo';
 
 const template = siteTemplate({
-  github: 'mrjvs/neatojs',
+  github: 'eventstorage/eventstorage',
   dropdown: [link('Guider', '/docs/guider'), link('Config', '/docs/config')],
   navigation: [link('Showcase', '/showcase')],
   settings: {
@@ -24,10 +24,10 @@ const template = siteTemplate({
     logo: () => <Logo />,
   },
   contentFooter: {
-    editRepositoryBase: 'https://github.com/mrjvs/neatojs/tree/dev/apps/docs',
+    editRepositoryBase: 'https://github.com/eventstorage/eventstorage/tree/main/docs',
     socials: [
       social.discord('https://discord.gg/cGd5pKxWyK'),
-      social.github('https://github.com/mrjvs/neatojs'),
+      social.github('https://github.com/eventstorage/eventstorage'),
     ],
   },
   meta: {
@@ -41,12 +41,12 @@ const template = siteTemplate({
   },
 });
 
-const gdGuides = (url: string) => `/docs/guider/guides${url}`;
+const gdGuides = (url: string) => `/v0.0.0-beta.13/guides${url}`;
 const gdWriting = (url: string) => `/docs/guider/writing${url}`;
 const gdApi = (url: string) => `/docs/guider/api-reference${url}`;
 
 const starLinks = [
-  link('GitHub', 'https://github.com/mrjvs/neatojs', {
+  link('GitHub', 'https://github.com/eventstorage/eventstorage', {
     style: 'star',
     newTab: true,
     icon: 'akar-icons:github-fill',
@@ -56,7 +56,7 @@ const starLinks = [
     newTab: true,
     icon: 'fa6-brands:discord',
   }),
-  link('Suggest features', 'https://github.com/mrjvs/neatojs/issues', {
+  link('Suggest features', 'https://github.com/eventstorage/eventstorage/issues', {
     style: 'star',
     newTab: true,
     icon: 'streamline:chat-bubble-typing-oval-solid',
@@ -72,7 +72,7 @@ export default defineTheme([
       }),
     ],
   }),
-  site('guider', {
+  site('v0.0.0-beta.13', {
     extends: [template],
     tabs: [
       link('Guides', '/docs/guider/guides'),
