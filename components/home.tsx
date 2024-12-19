@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react';
 
 function Container(props: { children?: ReactNode }) {
-  return <div className="max-w-3xl my-20 mx-auto">{props.children}</div>;
+  return <div className="max-w-3xl my-10 mx-20 mx-auto">{props.children}</div>;
 }
 
 function Title(props: { children?: ReactNode }) {
@@ -14,7 +14,7 @@ function Title(props: { children?: ReactNode }) {
 
 function Subtitle(props: { children?: ReactNode }) {
   return (
-    <p className="text-lg leading-normal max-w-md mb-16">{props.children}</p>
+    <p className="text-lg leading-normal max-w-md mb-12">{props.children}</p>
   );
 }
 

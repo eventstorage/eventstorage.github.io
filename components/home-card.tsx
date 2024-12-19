@@ -31,7 +31,7 @@ function Description(props: { children?: ReactNode }) {
 }
 
 export function HomeCardContainer(props: { children?: ReactNode }) {
-  return <div className="space-y-4">{props.children}</div>;
+  return <div className="space-y-5">{props.children}</div>;
 }
 
 export const HomeCard = {

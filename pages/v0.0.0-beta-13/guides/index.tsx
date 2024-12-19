@@ -1,5 +1,5 @@
 import { createRedirect } from '@neato/guider/client';
 
 export default createRedirect({
-  to: '/docs/guider/guides/getting-started/installation',
+  to: '/v0.0.0-beta.13/guides/getting-started/installation',
 });

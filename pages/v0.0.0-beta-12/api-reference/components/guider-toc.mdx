@@ -1,0 +1,25 @@
+# `<GuiderToc />`
+
+React component that will show the currently configured table of contents.
+
+It respects the configured `toc` in the layout settings. Read more [about partials](../theme/settings.mdx#about-partials).
+
+Will show one of:
+ - Nothing if the table of contents is set to be hidden.
+ - The default table of contents with the configured settings.
+ - The custom component if the table of contents has been overriden in the partials.
+
+## Example
+
+```tsx
+<div id="custom-toc">
+  <GuiderToc /> // [!code focus]
+</div>
+```
+
+
+## Reference
+
+```tsx
+function GuiderToc(): ReactNode;
+```

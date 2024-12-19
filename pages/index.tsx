@@ -1,4 +1,4 @@
-import { Button, GuiderLayout } from '@neato/guider/client';
+import { Button, GuiderLayout, Hero, Card, CardGrid } from '@neato/guider/client';
 import { Home } from 'components/home';
 import { HomeCard, HomeCardContainer } from 'components/home-card';
 
@@ -23,8 +23,8 @@ export default function LandingPage() {
         'NodeJS configuration loader with strict typing and autocomplete.',
       href: '/docs/config',
       icon: 'material-symbols:settings-heart-rounded',
-    },
-  ];
+    },]
+
   return (
     <GuiderLayout meta={{ layout: 'page' }}>
       <Home.Container>
@@ -35,23 +35,30 @@ export default function LandingPage() {
           Tools that follow the philosophy of doing only one thing, and doing it
           right!
         </Home.Subtitle>
+        <Hero.Badge title="v1.0.0-beta.13" to="/docs/guider/guides">
+          Just went out of beta!
+        </Hero.Badge>
         <HomeCardContainer>
-          {projects.map((v) => (
-            <HomeCard.Card
-              key={v.href}
-              icon={v.icon}
-              right={
-                <Button to={v.href} type="secondary">
-                  View project
-                </Button>
-              }
-            >
-              <HomeCard.Title href={v.href}>{v.title}</HomeCard.Title>
-              <HomeCard.Description>{v.description}</HomeCard.Description>
-            </HomeCard.Card>
-          ))}
+          <Button to="/v0.0.0-beta.13">Get started</Button>
+          <Button to="https://github.com/eventstorage/eventstorage" type="secondary">
+            View on GitHub
+          </Button>
         </HomeCardContainer>
       </Home.Container>
+      <CardGrid>
+        <Card icon="material-symbols:edit-document" title="Focus on writing">
+          Effortlessly create beautiful documentation sites using Markdown or
+          MDX files.
+        </Card>
+        <Card icon="mdi:puzzle" title="Unopinionated">
+          Guider doesn't make assumptions about your site. Use it by itself or
+          include it as part of a larger project.
+        </Card>
+        <Card icon="solar:pallete-2-bold" title="Themable to the core">
+          Comes out the box with a ready-to-go theme, but can easily be made to
+          look exactly like what you have envisioned.
+        </Card>
+      </CardGrid>
     </GuiderLayout>
   );
 }
