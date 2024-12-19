@@ -79,7 +79,7 @@ export default defineTheme([
     ],
     directories: [
       directory('main', {
-        sidebar: [],
+        sidebar: [        ],
       }),
     ],
   }),

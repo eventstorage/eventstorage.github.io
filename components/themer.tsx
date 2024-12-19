@@ -3,9 +3,9 @@ import { Button } from '@neato/guider/client';
 import classNames from 'classnames';
 import type { ReactNode } from 'react';
 import React, { useState, useCallback, useRef } from 'react';
-import type { HsbColor } from 'hooks/color-select';
-import { hsbToColorToString, useColorSelect } from 'hooks/color-select';
-import { makeColors, useGuideThemePicker } from 'hooks/use-guider-theme-picker';
+import type { HsbColor } from '../hooks/color-select';
+import { hsbToColorToString, useColorSelect } from '../hooks/color-select';
+import { makeColors, useGuideThemePicker } from '../hooks/use-guider-theme-picker';
 import styles from './themer.module.css';
 
 function ThemeColor(props: {

@@ -6,10 +6,12 @@ import {
   Hero,
 } from '@neato/guider/client';
 
+import { Home } from '../components/home';
+
 export default function LandingPage() {
   return (
-    <GuiderLayout meta={{ layout: 'page', site: 'home' }}>
-      <Hero>
+    <GuiderLayout meta={{ layout: 'page', site: 'home'}}>
+      <Home.Container>
         <Hero.Badge title="V1.0.0" to="/docs/guider/guides">
           Just went out of alpha!
         </Hero.Badge>
@@ -24,7 +26,7 @@ export default function LandingPage() {
             View on GitHub
           </Button>
         </Hero.Actions>
-      </Hero>
+      </Home.Container>
       <CardGrid>
         <Card icon="material-symbols:edit-document" title="Focus on writing">
           Effortlessly create beautiful documentation sites using Markdown or
