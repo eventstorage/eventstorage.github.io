@@ -4,20 +4,15 @@ import {
   group,
   link,
   site,
-  separator,
   siteTemplate,
   social,
   type SiteComponent,
 } from '@neato/guider/theme';
-import { Logo } from './components/logo';
-
+import { Logo } from 'components/logo';
 
 const template = siteTemplate({
   github: 'mrjvs/neatojs',
-  dropdown: [
-    link('v0.0.0-beta.13', '/v0.0.0-beta.13'),
-    link('v0.0.0-beta.12', '/v0.0.0-beta.12')
-  ],
+  dropdown: [link('Guider', '/docs/guider'), link('Config', '/docs/config')],
   navigation: [link('Showcase', '/showcase')],
   settings: {
     colors: {
@@ -51,7 +46,7 @@ const gdWriting = (url: string) => `/docs/guider/writing${url}`;
 const gdApi = (url: string) => `/docs/guider/api-reference${url}`;
 
 const starLinks = [
-  link('GitHub', 'https://github.com/eventstorage/eventstorage', {
+  link('GitHub', 'https://github.com/mrjvs/neatojs', {
     style: 'star',
     newTab: true,
     icon: 'akar-icons:github-fill',
@@ -61,37 +56,31 @@ const starLinks = [
     newTab: true,
     icon: 'fa6-brands:discord',
   }),
-  link('Suggest features', 'https://github.com/eventstorage/eventstorage/issues', {
+  link('Suggest features', 'https://github.com/mrjvs/neatojs/issues', {
     style: 'star',
     newTab: true,
     icon: 'streamline:chat-bubble-typing-oval-solid',
   }),
 ];
 
-
 export default defineTheme([
-  site('home', {
+  site('main', {
     extends: [template],
-    tabs: [
-      link('Getting started', '/v0.0.0-beta.13/getting-started'),
-      link('Documentation', '/v0.0.0-beta.13/getting-started'),
-      link('Learning', '/v0.0.0-beta.13/getting-started'),
-    ],
     directories: [
       directory('main', {
-        sidebar: [        ],
+        sidebar: [],
       }),
     ],
   }),
-  site('v0.0.0-beta.13', {
+  site('guider', {
     extends: [template],
     tabs: [
-      link('Getting started', '/v0.0.0-beta.13/getting-started'),
-      link('Documentation', '/v0.0.0-beta.13/documentation'),
-      link('Learning', '/v0.0.0-beta.13/learning'),
+      link('Guides', '/docs/guider/guides'),
+      link('Writing', '/docs/guider/writing'),
+      link('API reference', '/docs/guider/api-reference'),
     ],
     directories: [
-      directory('getting-started', {
+      directory('guider-docs', {
         sidebar: [
           ...starLinks,
           group('Getting started', [
@@ -153,7 +142,7 @@ export default defineTheme([
           ]),
         ],
       }),
-      directory('documentation', {
+      directory('guider-writing', {
         sidebar: [
           ...starLinks,
           group('Markdown', [
@@ -211,7 +200,7 @@ export default defineTheme([
           ]),
         ],
       }),
-      directory('learning', {
+      directory('guider-api-ref', {
         sidebar: [
           ...starLinks,
           group('Theme configuration', [
