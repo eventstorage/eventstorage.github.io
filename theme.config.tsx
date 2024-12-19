@@ -86,12 +86,12 @@ export default defineTheme([
   site('v0.0.0-beta.13', {
     extends: [template],
     tabs: [
-      link('Installation', '/v0.0.0-beta.13/getting-started'),
       link('Getting started', '/v0.0.0-beta.13/getting-started'),
-      link('Learning', '/v0.0.0-beta.13/getting-started'),
+      link('Documentation', '/v0.0.0-beta.13/documentation'),
+      link('Learning', '/v0.0.0-beta.13/learning'),
     ],
     directories: [
-      directory('installation', {
+      directory('getting-started', {
         sidebar: [
           ...starLinks,
           group('Getting started', [
@@ -153,7 +153,7 @@ export default defineTheme([
           ]),
         ],
       }),
-      directory('getting-started', {
+      directory('documentation', {
         sidebar: [
           ...starLinks,
           group('Markdown', [
@@ -211,7 +211,7 @@ export default defineTheme([
           ]),
         ],
       }),
-      directory('guider-api-ref', {
+      directory('learning', {
         sidebar: [
           ...starLinks,
           group('Theme configuration', [
