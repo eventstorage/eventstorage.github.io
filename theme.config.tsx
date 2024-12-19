@@ -12,7 +12,7 @@ import { Logo } from 'components/logo';
 
 const template = siteTemplate({
   github: 'eventstorage/eventstorage',
-  dropdown: [link('Guider', '/docs/guider'), link('Config', '/docs/config')],
+  dropdown: [link('v0.0.0-beta.13', '/v0.0.0-beta.13'), link('v0.0.0-beta.12', '/v0.0.0-beta.13')],
   navigation: [link('Showcase', '/showcase')],
   settings: {
     colors: {
@@ -75,9 +75,9 @@ export default defineTheme([
   site('v0.0.0-beta.13', {
     extends: [template],
     tabs: [
-      link('Guides', '/docs/guider/guides'),
-      link('Writing', '/docs/guider/writing'),
-      link('API reference', '/docs/guider/api-reference'),
+      link('Getting started', '/v0.0.0-beta.13/getting-started'),
+      link('Documentation', '/v0.0.0-beta.13/docs'),
+      link('Learning', '/v0.0.0-beta.13/learn'),
     ],
     directories: [
       directory('guider-docs', {
