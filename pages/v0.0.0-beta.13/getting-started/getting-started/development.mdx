@@ -1,33 +1,183 @@
 # Development
 
-This guide goes over some tips to get the optimal developer experience for writing your documentation.
+This walk through guide explains the development process in turning our project into an event sourced solution.
 
+Get our api project up and running quickly with `eventstorage` following steps down below.
 
-## Running the development server
+## Use `AddEventStorage` collection extension
 
-After you've gone through the installation process, all you need to do get up and running is
-run the dev script with your favourite package manager. For an example with NPM:
-
-```sh
-npm run dev
+`eventstorage` provides an extension to service collection to add event sourcing functionality into our project,
+simply open up `Program.cs` from api project and call `AddEventStorage` against the service collection.
+```csharp title="Program.cs" showLineNumbers
+builder.Services.AddEventStorage(storage =>
+{
+    
+});
 ```
 
 <Note>
-The Next.JS development server is infamous for being slow. The final build of the site will be **much** faster.
+Again you can skip these steps if you are experienced and get yourself packed with self-explaining configuration.
 </Note>
 
 
-## Building for production
+## Select event storage configuration
 
-To build your production build, you can run `npm run build{:sh}` (or use your favourite package manager).
+Use `storage` configuration option to specify a connection string and a schema for your event storage.
+```csharp title="Program.cs" showLineNumbers
+builder.Services.AddEventStorage(storage =>
+{
+    storage.Schema = "es"; // default is es
+    storage.ConnectionString = builder.Configuration["Connection"];
+});
+```
 
-This will create a folder called `out` that holds the final build that's ready for deployment.
+Select event storage of choice among Azure Sql, Postgres or Sql Server.
+```csharp title="Program.cs" showLineNumbers
+builder.Services.AddEventStorage(storage =>
+{
+    storage.Schema = "es"; // default is es
+    storage.ConnectionString = builder.Configuration["Connection"];
 
-If you want to preview it, you can run `npx run serve out` to spin up a temporary HTTP server that serves the `out` folder.
+    storage.AddEventSource(source =>
+    {
+        source.Select(EventStore.PostgresSql);
+    });
+});
+```
 
+## Create aggregate root with `EventSource<TId>`
 
-## Autocomplete and syntax highlighting for MDX files
+Define your aggregate with the help of `EventSource<TId>` where `TId` can be either `long` or `Guid`
+to identify event streams/event sources in our event storage.
 
-By default, most code editors will not support MDX files. To add support, you can install the MDX extensions:
-  - For JetBrains editors, you can use the JetBrains maintained [MDX plugin](https://plugins.jetbrains.com/plugin/14944-mdx).
-  - For VSCode, you can install the [MDX extension](https://marketplace.visualstudio.com/items?itemName=unifiedjs.vscode-mdx) maintained by the MDX team.
+<Note>
+Selecting `long` as stream identifier offers lightnening-fast stream access and is more human readable. 
+</Note>
+
+To create aggregate root and its corresponding domain logic, let's create another project as `Order` to hold
+our domain by running the following in project root:
+```sh
+dotnet new classlib -o src\Order
+```
+Add the new project library to the solution as well:
+```sh
+dotnet sln Order.sn add src\Order --in-root
+```
+An `Order` reference to `Order.Api` is required as we establish a dependency towards our `Order` domain:
+```sh
+dotnet add src\Order.Api reference src\Order
+```
+We also need to add `EventStorage` pack into our `Order` project:
+```sh
+dotnet add src\Order package EventStorage --prerelease
+```
+
+Now place below `OrderBooking` aggregate root inside of `Order` library.
+
+```csharp title="OrderBooking.cs" showLineNumbers
+public class OrderBooking : EventSource<long> // or Guid
+{
+    public OrderStatus OrderStatus { get; private set; }
+    public void Apply(OrderPlaced e)
+    {
+        OrderStatus = OrderStatus.Placed;
+    }
+    public void PlaceOrder(PlaceOrder command)
+    {
+        if(OrderStatus == OrderStatus.Placed)
+            return;
+        RaiseEvent(new OrderPlaced(command));
+    }
+}
+```
+
+As we can see this requires `PlaceOrder` command, `OrderPlaced` event and `OrderStatus` to be created:
+```csharp showLineNumbers
+public enum OrderStatus
+{
+    Draft = 0,
+    Placed = 1,
+    Confirmed = 2,
+}
+public record PlaceOrder(string ProductName, int Quantity, string UserId);
+
+public record OrderPlaced(PlaceOrder Command) : SourcedEvent;
+```
+
+## Place an order
+Let's now go ahead and expose an endpoint that helps placing an order using `IEventStorage<T>` service.
+
+Add below api to `Program.cs` of `Order.Api`.
+
+```csharp title="Program.cs" showLineNumbers
+app.MapPost("api/placeorder", 
+async(IEventStorage<OrderBooking> storage, PlaceOrder command) =>
+{
+    var aggregate = await storage.CreateOrRestore();
+    aggregate.PlaceOrder(command);
+ 
+    await storage.Commit(aggregate);
+ 
+    return Results.Ok(aggregate.SourceId);
+});
+
+app.Run();
+```
+
+Run the api with `dotnet run --project src\Order.Api {:sh}` and access Swagger through provided link
+to quickly place an order.
+```sh
+http(s)://localhost:{port}/swagger
+```
+
+Once you execute a request, check your database and get to see the event storage.
+
+## Project placed order
+
+This is the last step of this up and running tutorial where we add a projection and see our order status in action.
+
+<Steps>
+<Steps.Step>
+Create `OrderProjection` projection with the help of `Projection<M>`.
+
+Place below order projection inside of `Order` project:
+
+```csharp title="OrderProjection.cs" showLineNumbers
+public record OrderDetail(string SourceId, OrderStatus Status, long Version);
+
+public class OrderProjection : Projection<OrderDetail>
+{
+    public static OrderDetail Project(OrderPlaced orderPlaced) =>
+        new(orderPlaced.SourceId?.ToString()?? "", OrderStatus.Placed, orderPlaced.Version);
+}
+```
+</Steps.Step>
+<Steps.Step>
+Add the projection to our event source configuration:
+```csharp title="Program.cs" showLineNumbers
+builder.Services.AddEventStorage(storage =>
+{
+    storage.Schema = "es";
+    storage.AddEventSource(source =>
+    {
+        source.Select(EventStore.PostgresSql, connectionString)
+        .Project<OrderProjection>();
+    });
+});
+```
+</Steps.Step>
+<Steps.Step>
+Expose another api to query our orders and pull order status:
+```csharp title="Program.cs" showLineNumbers
+app.MapGet("api/getOrder", async(IEventStorage<OrderBooking> storage, string orderId) => 
+    await storage.Project<OrderDetail>(orderId));
+```
+
+Restart the api and head over to Swagger again to run the newly created api to get order status.
+</Steps.Step>
+</Steps>
+
+## What's next?
+
+We have managed to get our api up and running and we even placed an order and projected into a read model.
+  - next we dive deeper into further configuration of our event source

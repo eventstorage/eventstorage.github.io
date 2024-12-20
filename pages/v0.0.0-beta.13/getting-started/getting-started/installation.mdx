@@ -45,9 +45,12 @@ Follow the steps below to jump start the installation and prepare the event stor
         These steps are for starters and you could probably skip them if you are an experienced dotnet.
       </Note>
       <Steps.Step>
-        Create your app folder `eventstorage-app` for instance then get inside of the folder and run
-        `dotnet new globaljson --sdk-version=8.0.401 {:sh}` which creates `global.json` specifying net sdk version
-        for your project.
+        Create your app folder, `order-app` for instance then get inside of the folder and
+        create a `global.json` file which specifies project net sdk verison by running: 
+        
+        ```sh
+        dotnet new globaljson --sdk-version=8.0.401
+        ```
 
         Run `dotnet --list-sdks {:sh}` to list installed sdk versions on your machine if you are not
         sure which ones you've installed.
@@ -62,15 +65,15 @@ Follow the steps below to jump start the installation and prepare the event stor
         ```
       </Steps.Step>
       <Steps.Step>
-        Create a solution by running `dotnet new solution -n EventStorage {:sh}` inside of the folder.
+        Create a solution by running `dotnet new solution -n Order {:sh}` inside of the folder.
       </Steps.Step>
       <Steps.Step>
         Create `src` folder followed by creating a dotnet api project inside of `src` folder with
-        `dotnet new webapi -n EventStorage.Api {:sh}`
+        `dotnet new webapi -n Order.Api {:sh}`
       </Steps.Step>
       <Steps.Step>
         Get back to the root folder and add the api project to the solution with `dotnet sln
-        EventStorage.sln add src\EventStorage.Api --in-root {:sh}`.
+        Order.sln add src\Order.Api --in-root {:sh}`.
       </Steps.Step>
       <Steps.Step>
         Finally run `dotnet build {:sh}` and it should build the solution properly.
@@ -80,14 +83,24 @@ Follow the steps below to jump start the installation and prepare the event stor
     <Steps.Step>
       ### Get ready to spin up an event storage!
       One last step of the installation tutorial is adding `EventStorage`
-      package into our api project by running `dotnet add src\EventStorage.Api package EventStorage --prerelease {:sh}`
-      in the root folder or `dotnet add package EventStorage --prerelease {:sh}` inside of api project.
+      package into our api project by running the following in the root folder:
+      ```sh
+      dotnet add src\Order.Api package EventStorage --prerelease
+      ```
+      or `dotnet add package EventStorage --prerelease {:sh}` inside of api project.
     </Steps.Step>
   </Steps>
     
 
+We have everything setup now and are ready to spin up our project with `eventstorage` library.
+
 ## What's next?
 
-We have everything setup now and are ready to spin up our project with the library.
-- Next we start developing our api and turn that into an event sourced service
-with  [EventStorage](https://www.nuget.org/packages/eventstorage/readme.md) library.
+Next we start developing and turning our project into an event sourced solution
+with [EventStorage](https://www.nuget.org/packages/eventstorage/readme.md) library:
+- Use `AddEventStorage` collection extension to add event sourcing configuration
+- Select event storage configuration options required to spin up our event storage
+- Create aggregate root with `EventSource<TId>` which represents our domain
+- Place an order by exposing an api endpoint
+- Project placed order and expose another api to query our orders
+
