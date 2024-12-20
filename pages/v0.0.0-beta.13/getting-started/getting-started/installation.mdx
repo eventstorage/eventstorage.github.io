@@ -1,156 +1,93 @@
-# Getting started with Guider
+# Getting started with eventstorage
 
-Guider is built on top of Next.JS, this gives you the flexibilty to include
-it as part of a normal React app built with Next.JS.
-
-Get started with `@neato/guider` project in under 5 minutes.
+eventstorage is a high-performance event sourcing framework built for dotnet offering the event storage
+of choice between Azure Sql database, Postgre Sql and Sql Server.
 
 
 ## Installation
 
-Follow the steps below to make a new Guider project.
+Follow the steps below to jump start the installation and prepare the event storage infrastructure.
+  <Steps>
+    <Steps.Step>
+      ### Install .NET 8 SDK
+      
+      es runs on dotnet 8 and requires the sdk installed:
+      ```sh
+      https://dotnet.microsoft.com/en-us/download/dotnet/8.0
+      ```
+    </Steps.Step>
+    <Steps.Step>
+      ### Setup dependencies
+      Run mssql or pg database on docker.
 
-<Tabs items={["Automatic install", "Manual install"]}>
-  <Tabs.Tab>
+      Using `docker-compose`: 
+      ```sh
+      docker compose --project-name eventstorage up -d
+      ```
+      Using `docker run` for pg:
+      ```sh
+      docker run --name some-postgres -p 5432:5432 -e POSTGRES_PASSWORD=postgres -d postgres
+      ```
+      Using `docker run` for mssql:
+      ```sh
+      docker run --name some-mssql -p 1433:1433 -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=sysadmin@1234" -d mcr.microsoft.com/mssql/server:2019-latest
+      ```
+      Optionally run `Redis` for high-performance projections:
+      ```sh
+      docker run -d --name redis-stack -p 6379:6379 -p 8001:8001 redis/redis-stack:latest
+      ```
+    </Steps.Step>
+    <Steps.Step>
+      ### Create a dotnet web api project
+      <Steps>
+      Once we have are done running needed docker dependencies, we can start setting up eventstorage.
+      <Note>
+        These steps are for starters and you could probably skip them if you are an experienced dotnet.
+      </Note>
+      <Steps.Step>
+        Create your app folder `eventstorage-app` for instance then get inside of the folder and run
+        `dotnet new globaljson --sdk-version=8.0.401 {:sh}` which creates `global.json` specifying net sdk version
+        for your project.
 
-    <Steps>
-      <Steps.Step>
-        ### Run the automatic installer
-        Start the installer by running this command:
-        ```sh
-        npx @neato/create-guider
-        ```
-      </Steps.Step>
-      <Steps.Step>
-        ### Install dependencies
-        Navigate to the directory the installer made and run the following:
-        ```sh npm2yarn
-        npm install
-        ```
-      </Steps.Step>
-      <Steps.Step>
-        ### Ready to write!
-        Your project has been fully setup, all that's left is to fill it with content.
-
-        Run the developer server with `npm run dev{:sh}` and see the first page by visiting the link shown in the console.
-        <Note>
-          The Next.JS development server is infamous for being slow. The final build of the site will be **much** faster.
-        </Note>
-      </Steps.Step>
-    </Steps>
-  </Tabs.Tab>
-  <Tabs.Tab>
-    <Steps>
-      <Steps.Step>
-        ### Create a Next.JS project and install Guider
-        To install a Next.JS project with guider, install the following dependencies:
-        ```sh npm2yarn
-        npm install next@latest react@latest react-dom@latest @neato/guider@latest
-        ```
-        then add the following scripts to your `package.json`:
-        ```json title="package.json" showLineNumbers
+        Run `dotnet --list-sdks {:sh}` to list installed sdk versions on your machine if you are not
+        sure which ones you've installed.
+        
+        This is how a `global.json` looks like depending on your sdk version:
+        ```json title="global.json" showLineNumbers
         {
-          "scripts": {
-            "dev": "next dev",
-            "build": "next build",
-            "start": "next start",
-            "lint": "next lint"
+          "sdk": {
+            "version": "8.0.401"
           }
         }
         ```
       </Steps.Step>
       <Steps.Step>
-        ### Add a Next.JS config
-        Create or replace the following `next.config.mjs` file in your project's root directory.
-        ```js title="next.config.mjs" showLineNumbers
-        import { guider } from "@neato/guider";
-
-        const withGuider = guider({
-          // The location of your theme file, created in the next step
-          themeConfig: './theme.config.tsx',
-        });
-
-        export default withGuider({
-          // These are the normal Next.JS settings.
-          // Check out Next.JS docs: https://nextjs.org/docs/app/api-reference/next-config-js
-          output: 'export',
-        });
-        ```
+        Create a solution by running `dotnet new solution -n EventStorage {:sh}` inside of the folder.
       </Steps.Step>
       <Steps.Step>
-        ### Create a theme config
-        Next, create a `theme.config.tsx`. This will be the home for all of your configuration and customization of Guider:
-        ```ts title="theme.config.tsx" showLineNumbers
-        import { defineTheme, directory, link } from '@neato/guider/theme';
-
-        export default defineTheme({
-          directories: [
-            directory("main", { // ID of your directory (unique per site), used for referencing in your page files
-              sidebar: [
-                // Creates a link in your sidebar, add more below it
-                link("Home", "/")
-              ]
-            })
-          ],
-        });
-        ```
+        Create `src` folder followed by creating a dotnet api project inside of `src` folder with
+        `dotnet new webapi -n EventStorage.Api {:sh}`
       </Steps.Step>
       <Steps.Step>
-        ### Create entrypoint files
-        Finally, create two files `pages/_app.tsx` and `pages/404.tsx`. They should be in your pages directory.
-        The app file is to setup the layout system and styled for Guider. The 404 file holds a preset "page not found" view, feel free to customize it.
-        <CodeGroup>
-          <CodeGroup.Code title="pages/_app.tsx">
-            ```tsx
-            import '@neato/guider/style.css';
-            import { createGuiderApp } from '@neato/guider/client';
-
-            export default createGuiderApp();
-            ```
-          </CodeGroup.Code>
-          <CodeGroup.Code title="pages/404.tsx">
-            ```tsx
-            import { createNotFoundPage } from '@neato/guider/client';
-
-            export default createNotFoundPage();
-            ```
-          </CodeGroup.Code>
-        </CodeGroup>
+        Get back to the root folder and add the api project to the solution with `dotnet sln
+        EventStorage.sln add src\EventStorage.Api --in-root {:sh}`.
       </Steps.Step>
       <Steps.Step>
-        ### Setup typescript
-        To make Guider work, you will need to slightly modify your tsconfig.json. If you don't have a tsconfig.json file yet, just make one at the root of your project.
-
-        If you do already have typescript, you can just change the single option in your existing config.
-
-        ```json title="tsconfig.json"
-        {
-          "compilerOptions": {
-            "moduleResolution": "Bundler", // [!code focus]
-          }
-        }
-        ```
+        Finally run `dotnet build {:sh}` and it should build the solution properly.
       </Steps.Step>
-      <Steps.Step>
-        ### Ready to write documentation!
-        Your project has been fully setup, all that's left is to fill it with content. Try it out by making a file in your pages directory:
-        ```md title="pages/index.mdx"
-        # Hello world
-        This is my first `@neato/guider` page!
-        ```
-        And run with `npm run dev{:sh}` and see your first page by visiting the link shown in the console.
-        <Note>
-          The Next.JS development server is infamous for being slow. The final build of the site will be **much** faster.
-        </Note>
-      </Steps.Step>
-    </Steps>
-  </Tabs.Tab>
-</Tabs>
-
+      </Steps>
+    </Steps.Step>
+    <Steps.Step>
+      ### Get ready to spin up an event storage!
+      One last step of the installation tutorial is adding `EventStorage`
+      package into our api project by running `dotnet add src\EventStorage.Api package EventStorage --prerelease {:sh}`
+      in the root folder or `dotnet add package EventStorage --prerelease {:sh}` inside of api project.
+    </Steps.Step>
+  </Steps>
+    
 
 ## What's next?
 
-You have everything setup now. To get acquainted with Guider. You can take the follow steps:
-- Learn how to [setup navigation](../config/navigation.mdx).
-- Check out the basics of [writing content](../../writing/markdown/basic-text.mdx).
-- Find out how to [deploy your site](../deploy/github-pages.mdx).
+We have everything setup now and are ready to spin up our project with the library.
+- Next we start developing our api and turn that into an event sourced service
+with  [EventStorage](https://www.nuget.org/packages/eventstorage/readme.md) library.

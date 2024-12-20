@@ -12,7 +12,7 @@ import { Logo } from 'components/logo';
 
 const template = siteTemplate({
   github: 'eventstorage/eventstorage',
-  dropdown: [link('v0.0.0-beta.13', '/v0.0.0-beta.13'), link('v0.0.0-beta.12', '/v0.0.0-beta.13')],
+  dropdown: [link('v0.0.0-beta.13', '/v0.0.0-beta.13'), link('v0.0.0-beta.12', '/v0.0.0-beta.12')],
   navigation: [link('Showcase', '/showcase')],
   settings: {
     colors: {
@@ -41,9 +41,9 @@ const template = siteTemplate({
   },
 });
 
-const gdGuides = (url: string) => `/v0.0.0-beta.13/guides${url}`;
-const gdWriting = (url: string) => `/docs/guider/writing${url}`;
-const gdApi = (url: string) => `/docs/guider/api-reference${url}`;
+const gdGetStarted = (url: string) => `/v0.0.0-beta.13/getting-started${url}`;
+const gdDocs = (url: string) => `/v0.0.0-beta.13/documentation${url}`;
+const gdLearn = (url: string) => `/v0.0.0-beta.13/learning${url}`;
 
 const starLinks = [
   link('GitHub', 'https://github.com/eventstorage/eventstorage', {
@@ -80,14 +80,14 @@ export default defineTheme([
       link('Learning', '/v0.0.0-beta.13/learn'),
     ],
     directories: [
-      directory('guider-docs', {
+      directory('getting-started', {
         sidebar: [
           ...starLinks,
           group('Getting started', [
-            link('Installation', gdGuides('/getting-started/installation'), {
+            link('Installation', gdGetStarted('/getting-started/installation'), {
               icon: 'fa6-solid:download',
             }),
-            link('Development', gdGuides('/getting-started/development'), {
+            link('Development', gdGetStarted('/getting-started/development'), {
               icon: 'icon-park-solid:cpu',
             }),
             link.nested({
@@ -96,49 +96,49 @@ export default defineTheme([
               items: [
                 link(
                   'From Nextra',
-                  gdGuides('/getting-started/migration/from-nextra'),
+                  gdGetStarted('/getting-started/migration/from-nextra'),
                 ),
                 link(
                   'From Docus',
-                  gdGuides('/getting-started/migration/from-docus'),
+                  gdGetStarted('/getting-started/migration/from-docus'),
                 ),
                 link(
                   'From Mintlify',
-                  gdGuides('/getting-started/migration/from-mintlify'),
+                  gdGetStarted('/getting-started/migration/from-mintlify'),
                 ),
               ],
             }),
           ]),
           group('Configuration', [
-            link('Colors & theme', gdGuides('/config/theming')),
-            link('Redirects', gdGuides('/config/redirects')),
-            link('SEO & Meta tags', gdGuides('/config/seo')),
-            link('Landing page', gdGuides('/config/landing')),
-            link('Navigation', gdGuides('/config/navigation')),
+            link('Colors & theme', gdGetStarted('/config/theming')),
+            link('Redirects', gdGetStarted('/config/redirects')),
+            link('SEO & Meta tags', gdGetStarted('/config/seo')),
+            link('Landing page', gdGetStarted('/config/landing')),
+            link('Navigation', gdGetStarted('/config/navigation')),
             link.nested('Common setups', [
               link(
                 'Multiple docs sites',
-                gdGuides('/config/common/multi-docs'),
+                gdGetStarted('/config/common/multi-docs'),
               ),
-              link('API reference + docs', gdGuides('/config/common/api-ref')),
+              link('API reference + docs', gdGetStarted('/config/common/api-ref')),
             ]),
           ]),
           group('Advanced', [
-            link('Running multiple sites', gdGuides('/advanced/multi-site')),
-            link('Header', gdGuides('/advanced/header')),
-            link('Footer', gdGuides('/advanced/footer')),
+            link('Running multiple sites', gdGetStarted('/advanced/multi-site')),
+            link('Header', gdGetStarted('/advanced/header')),
+            link('Footer', gdGetStarted('/advanced/footer')),
             link(
               'Customizing layout',
-              gdGuides('/advanced/customizing-layout'),
+              gdGetStarted('/advanced/customizing-layout'),
             ),
-            link('Deep-dive concepts', gdGuides('/advanced/deep-dive')),
+            link('Deep-dive concepts', gdGetStarted('/advanced/deep-dive')),
           ]),
           group('Deploying', [
-            link('GitHub Pages', gdGuides('/deploy/github-pages')),
-            link('Netlify', gdGuides('/deploy/netlify')),
-            link('Vercel', gdGuides('/deploy/vercel')),
-            link('Cloudflare Pages', gdGuides('/deploy/cloudflare')),
-            link('Docker', gdGuides('/deploy/docker')),
+            link('GitHub Pages', gdGetStarted('/deploy/github-pages')),
+            link('Netlify', gdGetStarted('/deploy/netlify')),
+            link('Vercel', gdGetStarted('/deploy/vercel')),
+            link('Cloudflare Pages', gdGetStarted('/deploy/cloudflare')),
+            link('Docker', gdGetStarted('/deploy/docker')),
           ]),
         ],
       }),
@@ -146,55 +146,55 @@ export default defineTheme([
         sidebar: [
           ...starLinks,
           group('Markdown', [
-            link('Making pages', gdWriting('/markdown/making-pages'), {
+            link('Making pages', gdDocs('/markdown/making-pages'), {
               icon: 'fa6-solid:file-lines',
             }),
-            link('Basic text', gdWriting('/markdown/basic-text'), {
+            link('Basic text', gdDocs('/markdown/basic-text'), {
               icon: 'fa6-solid:font',
             }),
-            link('Lists', gdWriting('/markdown/lists'), {
+            link('Lists', gdDocs('/markdown/lists'), {
               icon: 'fa6-solid:list-ul',
             }),
-            link('Code blocks', gdWriting('/markdown/code-blocks'), {
+            link('Code blocks', gdDocs('/markdown/code-blocks'), {
               icon: 'fa6-solid:code',
             }),
           ]),
 
           group('Advanced markdown', [
-            link('Tables', gdWriting('/advanced/tables'), {
+            link('Tables', gdDocs('/advanced/tables'), {
               icon: 'fa6-solid:table',
             }),
-            link('Quotes', gdWriting('/advanced/quotes'), {
+            link('Quotes', gdDocs('/advanced/quotes'), {
               icon: 'fa6-solid:quote-left',
             }),
-            link('Footnotes', gdWriting('/advanced/footnotes'), {
+            link('Footnotes', gdDocs('/advanced/footnotes'), {
               icon: 'fa6-solid:note-sticky',
             }),
-            link('Dividers', gdWriting('/advanced/dividers'), {
+            link('Dividers', gdDocs('/advanced/dividers'), {
               icon: 'fa6-solid:grip-lines',
             }),
           ]),
 
           group('Components', [
-            link('Code groups', gdWriting('/components/code-groups'), {
+            link('Code groups', gdDocs('/components/code-groups'), {
               icon: 'fa6-solid:layer-group',
             }),
-            link('Callouts', gdWriting('/components/callouts'), {
+            link('Callouts', gdDocs('/components/callouts'), {
               icon: 'fa6-solid:bell-concierge',
             }),
-            link('Tabs', gdWriting('/components/tabs'), {
+            link('Tabs', gdDocs('/components/tabs'), {
               icon: 'fa6-solid:window-restore',
             }),
-            link('Fields', gdWriting('/components/fields'), {
+            link('Fields', gdDocs('/components/fields'), {
               icon: 'fa6-solid:rectangle-list',
             }),
-            link('Steps', gdWriting('/components/steps'), {
+            link('Steps', gdDocs('/components/steps'), {
               icon: 'fa6-solid:list-ol',
             }),
-            link('Frames', gdWriting('/components/frames'), {
+            link('Frames', gdDocs('/components/frames'), {
               icon: 'fa6-solid:image',
             }),
-            link('Custom components', gdWriting('/components/custom'), {
+            link('Custom components', gdDocs('/components/custom'), {
               icon: 'fa6-solid:boxes-stacked',
             }),
           ]),
@@ -204,49 +204,49 @@ export default defineTheme([
         sidebar: [
           ...starLinks,
           group('Theme configuration', [
-            link('defineTheme()', gdApi('/theme/define-theme')),
-            link('site()', gdApi('/theme/site')),
-            link('siteTemplate()', gdApi('/theme/site-template')),
-            link('directory()', gdApi('/theme/directory')),
-            link('link()', gdApi('/theme/link')),
-            link('group()', gdApi('/theme/group')),
-            link('separator()', gdApi('/theme/separator')),
-            link('component()', gdApi('/theme/component')),
-            link('social()', gdApi('/theme/social')),
-            link('Layout settings', gdApi('/theme/settings')),
+            link('defineTheme()', gdLearn('/theme/define-theme')),
+            link('site()', gdLearn('/theme/site')),
+            link('siteTemplate()', gdLearn('/theme/site-template')),
+            link('directory()', gdLearn('/theme/directory')),
+            link('link()', gdLearn('/theme/link')),
+            link('group()', gdLearn('/theme/group')),
+            link('separator()', gdLearn('/theme/separator')),
+            link('component()', gdLearn('/theme/component')),
+            link('social()', gdLearn('/theme/social')),
+            link('Layout settings', gdLearn('/theme/settings')),
           ]),
 
-          group('Setup', [link('guider()', gdApi('/setup/guider'))]),
+          group('Setup', [link('guider()', gdLearn('/setup/guider'))]),
 
           group('_meta.json', [
-            link('Structure of _meta.json', gdApi('/meta/structure')),
+            link('Structure of _meta.json', gdLearn('/meta/structure')),
           ]),
 
           group('Client functions', [
-            link('createRedirect()', gdApi('/functions/create-redirect')),
+            link('createRedirect()', gdLearn('/functions/create-redirect')),
             link(
               'createNotFoundPage()',
-              gdApi('/functions/create-not-found-page'),
+              gdLearn('/functions/create-not-found-page'),
             ),
-            link('useGuider()', gdApi('/functions/use-guider')),
-            link('useGuiderPage()', gdApi('/functions/use-guider-page')),
+            link('useGuider()', gdLearn('/functions/use-guider')),
+            link('useGuiderPage()', gdLearn('/functions/use-guider-page')),
           ]),
 
           group('Theme components', [
-            link('<GuiderHeader/>', gdApi('/components/guider-header')),
-            link('<GuiderLayout/>', gdApi('/components/guider-layout')),
-            link('<GuiderSidebar/>', gdApi('/components/guider-sidebar')),
-            link('<GuiderToc/>', gdApi('/components/guider-toc')),
-            link('<GuiderLogo/>', gdApi('/components/guider-logo')),
+            link('<GuiderHeader/>', gdLearn('/components/guider-header')),
+            link('<GuiderLayout/>', gdLearn('/components/guider-layout')),
+            link('<GuiderSidebar/>', gdLearn('/components/guider-sidebar')),
+            link('<GuiderToc/>', gdLearn('/components/guider-toc')),
+            link('<GuiderLogo/>', gdLearn('/components/guider-logo')),
             link(
               '<GuiderContentFooter/>',
-              gdApi('/components/guider-content-footer'),
+              gdLearn('/components/guider-content-footer'),
             ),
             link(
               '<GuiderPageFooter/>',
-              gdApi('/components/guider-page-footer'),
+              gdLearn('/components/guider-page-footer'),
             ),
-            link('<GuiderPageEnd/>', gdApi('/components/guider-page-end')),
+            link('<GuiderPageEnd/>', gdLearn('/components/guider-page-end')),
           ]),
         ],
       }),
