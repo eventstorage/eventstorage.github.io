@@ -95,17 +95,12 @@ export default defineTheme([
             link('Event storage', gdGetStarted('/config/eventstorage'), {
               icon: 'fa6-solid:database'
             }),
-            link('Redirects', gdGetStarted('/config/redirects')),
-            link('SEO & Meta tags', gdGetStarted('/config/seo')),
-            link('Landing page', gdGetStarted('/config/landing')),
-            link('Navigation', gdGetStarted('/config/navigation')),
-            link.nested('Common setups', [
-              link(
-                'Multiple docs sites',
-                gdGetStarted('/config/common/multi-docs'),
-              ),
-              link('API reference + docs', gdGetStarted('/config/common/api-ref')),
-            ]),
+            link('Projections', gdGetStarted('/config/projections'), {
+            icon: 'icon-park-solid:data'
+          }),
+            link('Cheers!!', gdGetStarted('/config/cheers'), {
+              icon: 'icon-park-solid:success'
+            }), 
           ]),
           group('Advanced', [
             link('Running multiple sites', gdGetStarted('/advanced/multi-site')),

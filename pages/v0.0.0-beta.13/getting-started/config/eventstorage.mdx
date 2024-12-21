@@ -70,8 +70,8 @@ creates a table under `Orders{:sh}` holding all of the documents of that certain
 
 ## Event storage of choice
 
-We can select our event store of choice. Azure Sql, Postgres and Sql Server are supported so far homefully
-including EventStoreDb in the upcoming releases.
+We can select our event store of choice. `AzureSql{:sh}`, `Postgres{:sh}` and `SqlServer{:sh}` are supported
+so far homefully including EventStoreDb in the upcoming releases.
 
 Using `Select` extension, we pass our event store selection and optionally a connection string:
 ```csharp titl="Program.cs" showLineNumbers
@@ -88,5 +88,8 @@ builder.Services.AddEventStorage(storage =>
 ## What's next?
 
 Now that we learned how to configure our event storage with basic settings, next we:
-  - learn how to take our configuration further and see different projection modes supported
+  - Learn different projection modes supported by `eventstorage`
+  - Learn high-performance projections stored on `key-value` store `Redis`
+  - Expose projection endpoints to query different types of projections
+  - Confirm order and learn how to subscribe projections with events of our choice 
 
