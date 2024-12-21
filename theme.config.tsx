@@ -26,12 +26,12 @@ const template = siteTemplate({
   contentFooter: {
     editRepositoryBase: 'https://github.com/eventstorage/eventstorage/tree/main/docs',
     socials: [
-      social.discord('https://discord.gg/cGd5pKxWyK'),
+      social.discord('https://discord.gg/fcGd5pKxWyK'),
       social.github('https://github.com/eventstorage/eventstorage'),
     ],
   },
   meta: {
-    titleTemplate: '%s - NeatoJS',
+    titleTemplate: '%s - eventstorage',
     additionalLinkTags: [
       {
         rel: 'icon',
@@ -51,7 +51,7 @@ const starLinks = [
     newTab: true,
     icon: 'akar-icons:github-fill',
   }),
-  link('Discord', 'https://discord.gg/cGd5pKxWyK', {
+  link('Discord', 'https://discord.gg/cGd5pfKxWyK', {
     style: 'star',
     newTab: true,
     icon: 'fa6-brands:discord',
@@ -122,30 +122,13 @@ export default defineTheme([
       }),
     ],
   }),
-  site('config', {
+  site('v0.0.0-beta.12', {
     extends: [template],
     directories: [
       directory('main', {
         sidebar: [
-          ...starLinks,
-          group('Guide', [
-            link('Why use @neato/config', '/docs/config/guide/why-neat-config'),
-            link('Installation', '/docs/config/guide/installation'),
-            link('Usage', '/docs/config/guide/usage'),
-            link('Basic example', '/docs/config/guide/basic-example'),
-          ]),
-          group('API', [
-            link('Loaders', '/docs/config/api/loaders'),
-            link('Schemas', '/docs/config/api/schemas'),
-            link('Formatting', '/docs/config/api/formatting'),
-            link('Fragments', '/docs/config/api/fragments'),
-            link('Error handling', '/docs/config/api/errors'),
-            link('Utilities', '/docs/config/api/utils'),
-          ]),
-          group('Miscellaneous', [
-            link('Security', '/docs/config/misc/security'),
-            link('Changelog', '/docs/config/misc/changelog'),
-          ]),
+          ...starLinks
+          
         ],
       }),
     ],
