@@ -54,8 +54,8 @@ to identify event streams/event sources in our event storage.
 Selecting `long` as stream identifier offers lightnening-fast stream access and is more human readable. 
 </Note>
 
-To create aggregate root and its corresponding domain logic, let's create another project as `Order` to hold
-our domain by running the following in project root:
+To create aggregate root and its corresponding domain logic, let's create another project as `Order` and place
+our domain inside by running the following in project root:
 ```sh
 dotnet new classlib -o src\Order
 ```
@@ -173,10 +173,11 @@ app.MapGet("api/getOrder", async(IEventStorage<OrderBooking> storage, string ord
     await storage.Project<OrderDetail>(orderId));
 ```
 
-Restart the api and head over to Swagger again to run the newly created api to get order status.
+Restart the api and head over to Swagger again to run the newly created api to query order status.
 </Steps.Step>
 </Steps>
 
+## Hooray!! Our api is event sourced and up and running!
 ## What's next?
 
 We have managed to get our api up and running and we even placed an order and projected into a read model.

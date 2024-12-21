@@ -90,24 +90,6 @@ export default defineTheme([
             link('Development', gdGetStarted('/getting-started/development'), {
               icon: 'icon-park-solid:cpu',
             }),
-            link.nested({
-              title: 'Migrating to Guider',
-              icon: 'fa6-solid:sailboat',
-              items: [
-                link(
-                  'From Nextra',
-                  gdGetStarted('/getting-started/migration/from-nextra'),
-                ),
-                link(
-                  'From Docus',
-                  gdGetStarted('/getting-started/migration/from-docus'),
-                ),
-                link(
-                  'From Mintlify',
-                  gdGetStarted('/getting-started/migration/from-mintlify'),
-                ),
-              ],
-            }),
           ]),
           group('Configuration', [
             link('Colors & theme', gdGetStarted('/config/theming')),
