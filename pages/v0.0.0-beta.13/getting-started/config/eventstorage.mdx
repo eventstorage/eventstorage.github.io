@@ -1,136 +1,92 @@
 import { ThemerContainer } from "components/themer"
 
-# Colors & theme
+# Event storage configuration
 
-Guider has been designed fit almost any use case for documentation.
-Naturally, this means that there are lots of configuration options to provide the flexibility Guider offers.
+eventstorage allows a few configuration options to help tailor the infrastructure to developer needs.
 
-Usually, the first thing to change is the branding.
+The schema and connection string of our event storage is usually placed early into the configuration.
 
-## Introduction to layout settings
+## Schema and connection string
 
-Layout settings can be modified on three layers, each one overriding settings from a previous layer. The layers are as follows:
-- **Site layout settings:** The base layer of layout settings is simply on `Site.settings`.
-- **Layout settings:** The second layer that counts is on a layout itself at `Layout.settings`.
-- **Directory layout settings:** The last layer is on a directory at `Directory.settings`.
+We can define our schema and connection string using the `storage` option or the `source` option
+whichever best fits one's needs.
 
-All of these layers are resolved in order. So if you have something specified on the directory layer, it will overwrite all other layers.
-If you specify something on the layout layer, it will overwrite the site layer but not the directory layer.
+Using `storage` configuration option:
 
-```ts title="Layer examples"
-site('main', {
-  settings: {
-    toc: false,
-    sidebar: false,
-  }
-  directories: [
-    directory("main", {
-      layout: "test-layout"
-      sidebar: [
-        link("Home", "/")
-      ],
-      settings: {
-        toc: false,
-      }
-    })
-  ],
-  layouts: [
-    layout('test-layout', {
-      settings: {
-        toc: true,
-        sidebar: true,
-      }
-    })
-  ]
-})
+```csharp title="Program.cs" showLineNumbers
+builder.Services.AddEventStorage(storage =>
+{
+    storage.Schema = "es"; // default is es
+    storage.ConnectionString = "connection string";
+});
 ```
 
-In this example, the final result will be `toc == false{:ts}` because the directory settings have the highest priority and `sidebar == true{:ts}` because the settings in layouts are a higher priority than the site settings.
-
-## Changing colors
-
-Now that you know how layout settings are resolved. We can start customising the colors and other layout settings:
-
-```ts
-settings: {
-  colors: {
-    // Main theme colors
-    primary: '#50A0EA', // Primary color of the site
-    primaryDarker: '#1B65A9', // A darker variant of primary color
-    primaryLighter: '#89C6FF', // A lighter variant of the primary color
-    text: '#668896', // Normal text color
-    textLighter: '#9AB3BD', // Slightly lighter text color
-    textHighlight: '#FFFFFF', // Heading and highlight text color.
-    background: '#050F13', // Main page background color
-    backgroundLighter: '#07171C', // Lighter background color for code blocks and such
-    backgroundLightest: '#081E24', // Lightest background color for hover effects
-    backgroundDark: '#040C0F' // Darker variant of the background color
-    line: '#0F2B33', // Color of all lines
-
-    // Colors in code blocks
-    codeWarning: '#222D20', // Codeblock background for a warning annotation
-    codeError: '#2B1B1F', // Codeblock background for a error annotation and diff remove
-    codeGreen: '#0B2823', // Codeblock background for a diff add
-    codeHighlight: '#0E2429', // Codeblock background for a highlighted line
-    codeWordHighlight: '#365C68', // Background of a highlighted word in a codeblock
-
-    // Semantic colors - Primarily used in callouts
-    // The lighter variants are used for text colors in callouts
-    semanticTip: '#39B864',
-    semanticTipLighter: '#75F2B6',
-    semanticNote: '#817EF3',
-    semanticNoteLighter: '#B9B8FC',
-    semanticImportant: '#A958E8',
-    semanticImportantLighter: '#D3A2F9',
-    semanticWarning: '#C0BC43',
-    semanticWarningLighter: '#ECE873',
-    semanticCaution: '#FC6359',
-    semanticCautionLighter: '#FFA59F',
-  }
-}
+Using `source` configuration option:
+```csharp title="Program.cs" showLineNumbers
+builder.Services.AddEventStorage(storage =>
+{
+    storage.AddEventSource(source =>
+    {
+        source.Schema = "es"; // default is es
+        source.ConnectionString = "connection string";
+        source.Select(EventStore.PostgresSql);
+    });
+});
 ```
 
-## Changing the logo
-
-If just want to modify the site name and homepage link, you can simple change it in site configuration:
-```ts
-site('site-id', {
-  logo: {
-    to: '/',
-    name: 'My docs'
-  },
-  // ... other settings
-})
+We can also choose to pass connection string to the `Select` extension:
+```csharp title="Program.cs" showLineNumbers
+builder.Services.AddEventStorage(storage =>
+{
+    storage.AddEventSource(source =>
+    {
+        source.Select(EventStore.PostgresSql, connectionString);
+    });
+});
 ```
 
-If you want to fully customize how your logo looks (For example, using an image as your logo), you can overwrite the full partial in **any settings layer**:
-```tsx
-settings: {
-  logo: () => <p>My logo</p>
-}
+## `EventStorage` schema
+
+`eventstorage` automatically spins up database schema on application start up and creates a few tables.
+
+<Steps>
+<Steps.Step>
+`EventSources{:sh}` this is the core `eventstorage` table persisting event streams using a flexible schema,
+since business decision changes are very frequent and we can't afford re-migrating our database and end up
+with lots of nullable fields, thefore business data is placed in json fields.
+</Steps.Step>
+<Steps.Step>
+`Checkpoints{:sh}` the framework makes use of this table to keep track of asyncchronous projections and ensures
+no pending events are missed using an asynchronous projection engine called `AsyncProjectionEngine.`
+we also make use of this table later to dispatch into message broker of choice.
+</Steps.Step>
+
+<Steps.Step>
+Projections: any projection registered into our `eventstorage` configuration ends up with a table named after
+the read model followed by an `s{:sh}` postfix. for example using `Order` read model in `OrderProjection`
+creates a table under `Orders{:sh}` holding all of the documents of that certain read model.
+</Steps.Step>
+</Steps>
+
+## Event storage of choice
+
+We can select our event store of choice. Azure Sql, Postgres and Sql Server are supported so far homefully
+including EventStoreDb in the upcoming releases.
+
+Using `Select` extension, we pass our event store selection and optionally a connection string:
+```csharp titl="Program.cs" showLineNumbers
+builder.Services.AddEventStorage(storage =>
+{
+    storage.AddEventSource(source =>
+    {
+        source.Select(EventStore.AzureSql, connectionString);
+        // where event store can either be AzureSql, PostgreSql or SqlServer
+    });
+});
 ```
 
+## What's next?
 
-## Enabling the background pattern
+Now that we learned how to configure our event storage with basic settings, next we:
+  - learn how to take our configuration further and see different projection modes supported
 
-You can optionally enable a fancy looking background pattern. It uses your configured primary colors.
-
-```tsx
-settings: {
-  backgroundPattern: 'flare'
-}
-```
-
-There are currently no other options other than `flare` and just having it disabled.
-
-<ThemerContainer>
-  ## Want to build a theme?
-
-  Give the color wheel a spin and generate a theme for your documentation.
-
-  If you want more freedom, you can also use this as a base for you main theme and just customize where neccesary.
-
-  ```json
-  CODE
-  ```
-</ThemerContainer>
