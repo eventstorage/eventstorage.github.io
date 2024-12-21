@@ -4,7 +4,7 @@ import { useGuiderPage } from '../../hooks/use-guider-page';
 import type { SocialTypes } from '../../../theme/components/social';
 import { GithubEditLink, useEditLink } from './github-edit-link';
 
-const guiderDocumentationLink = 'https://neatojs.com/docs/guider';
+const guiderDocumentationLink = '#';
 
 const iconMap: Record<SocialTypes, string> = {
   discord: 'ic:twotone-discord',
@@ -53,7 +53,7 @@ export function ContentFooterInternal() {
             rel="noopener noreferrer"
             className="hover:gd-opacity-50"
           >
-            Powered by Guider
+            {/* Powered by Guider */} eventstorage
           </Link>
         </div>
       </div>

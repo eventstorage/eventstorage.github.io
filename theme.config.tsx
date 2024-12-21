@@ -13,7 +13,7 @@ import { Logo } from 'components/logo';
 const template = siteTemplate({
   github: 'eventstorage/eventstorage',
   dropdown: [link('v0.0.0-beta.13', '/v0.0.0-beta.13'), link('v0.0.0-beta.12', '/v0.0.0-beta.12')],
-  navigation: [link('Showcase', '/showcase')],
+  navigation: [],
   settings: {
     colors: {
       primary: '#A880FF',
@@ -107,119 +107,17 @@ export default defineTheme([
           ]),
           group('Deploying', [
             link('GitHub Pages', gdGetStarted('/deploy/github-pages')),
-            link('Netlify', gdGetStarted('/deploy/netlify')),
-            link('Vercel', gdGetStarted('/deploy/vercel')),
-            link('Cloudflare Pages', gdGetStarted('/deploy/cloudflare')),
-            link('Docker', gdGetStarted('/deploy/docker')),
           ]),
         ],
       }),
-      directory('guider-writing', {
+      directory('documentation', {
         sidebar: [
           ...starLinks,
-          group('Markdown', [
-            link('Making pages', gdDocs('/markdown/making-pages'), {
-              icon: 'fa6-solid:file-lines',
-            }),
-            link('Basic text', gdDocs('/markdown/basic-text'), {
-              icon: 'fa6-solid:font',
-            }),
-            link('Lists', gdDocs('/markdown/lists'), {
-              icon: 'fa6-solid:list-ul',
-            }),
-            link('Code blocks', gdDocs('/markdown/code-blocks'), {
-              icon: 'fa6-solid:code',
-            }),
-          ]),
-
-          group('Advanced markdown', [
-            link('Tables', gdDocs('/advanced/tables'), {
-              icon: 'fa6-solid:table',
-            }),
-            link('Quotes', gdDocs('/advanced/quotes'), {
-              icon: 'fa6-solid:quote-left',
-            }),
-            link('Footnotes', gdDocs('/advanced/footnotes'), {
-              icon: 'fa6-solid:note-sticky',
-            }),
-            link('Dividers', gdDocs('/advanced/dividers'), {
-              icon: 'fa6-solid:grip-lines',
-            }),
-          ]),
-
-          group('Components', [
-            link('Code groups', gdDocs('/components/code-groups'), {
-              icon: 'fa6-solid:layer-group',
-            }),
-            link('Callouts', gdDocs('/components/callouts'), {
-              icon: 'fa6-solid:bell-concierge',
-            }),
-            link('Tabs', gdDocs('/components/tabs'), {
-              icon: 'fa6-solid:window-restore',
-            }),
-            link('Fields', gdDocs('/components/fields'), {
-              icon: 'fa6-solid:rectangle-list',
-            }),
-            link('Steps', gdDocs('/components/steps'), {
-              icon: 'fa6-solid:list-ol',
-            }),
-            link('Frames', gdDocs('/components/frames'), {
-              icon: 'fa6-solid:image',
-            }),
-            link('Custom components', gdDocs('/components/custom'), {
-              icon: 'fa6-solid:boxes-stacked',
-            }),
-          ]),
         ],
       }),
-      directory('guider-api-ref', {
+      directory('learn', {
         sidebar: [
           ...starLinks,
-          group('Theme configuration', [
-            link('defineTheme()', gdLearn('/theme/define-theme')),
-            link('site()', gdLearn('/theme/site')),
-            link('siteTemplate()', gdLearn('/theme/site-template')),
-            link('directory()', gdLearn('/theme/directory')),
-            link('link()', gdLearn('/theme/link')),
-            link('group()', gdLearn('/theme/group')),
-            link('separator()', gdLearn('/theme/separator')),
-            link('component()', gdLearn('/theme/component')),
-            link('social()', gdLearn('/theme/social')),
-            link('Layout settings', gdLearn('/theme/settings')),
-          ]),
-
-          group('Setup', [link('guider()', gdLearn('/setup/guider'))]),
-
-          group('_meta.json', [
-            link('Structure of _meta.json', gdLearn('/meta/structure')),
-          ]),
-
-          group('Client functions', [
-            link('createRedirect()', gdLearn('/functions/create-redirect')),
-            link(
-              'createNotFoundPage()',
-              gdLearn('/functions/create-not-found-page'),
-            ),
-            link('useGuider()', gdLearn('/functions/use-guider')),
-            link('useGuiderPage()', gdLearn('/functions/use-guider-page')),
-          ]),
-
-          group('Theme components', [
-            link('<GuiderHeader/>', gdLearn('/components/guider-header')),
-            link('<GuiderLayout/>', gdLearn('/components/guider-layout')),
-            link('<GuiderSidebar/>', gdLearn('/components/guider-sidebar')),
-            link('<GuiderToc/>', gdLearn('/components/guider-toc')),
-            link('<GuiderLogo/>', gdLearn('/components/guider-logo')),
-            link(
-              '<GuiderContentFooter/>',
-              gdLearn('/components/guider-content-footer'),
-            ),
-            link(
-              '<GuiderPageFooter/>',
-              gdLearn('/components/guider-page-footer'),
-            ),
-            link('<GuiderPageEnd/>', gdLearn('/components/guider-page-end')),
-          ]),
         ],
       }),
     ],
