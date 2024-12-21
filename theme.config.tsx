@@ -103,14 +103,7 @@ export default defineTheme([
             }), 
           ]),
           group('Advanced', [
-            link('Running multiple sites', gdGetStarted('/advanced/multi-site')),
-            link('Header', gdGetStarted('/advanced/header')),
-            link('Footer', gdGetStarted('/advanced/footer')),
-            link(
-              'Customizing layout',
-              gdGetStarted('/advanced/customizing-layout'),
-            ),
-            link('Deep-dive concepts', gdGetStarted('/advanced/deep-dive')),
+            link('Upcoming', gdGetStarted('/advanced/not-yet')),
           ]),
           group('Deploying', [
             link('GitHub Pages', gdGetStarted('/deploy/github-pages')),
