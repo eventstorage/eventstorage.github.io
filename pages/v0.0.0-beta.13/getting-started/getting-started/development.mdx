@@ -19,31 +19,22 @@ builder.Services.AddEventStorage(storage =>
 Again you can skip these steps if you are experienced and get yourself packed with self-explaining configuration.
 </Note>
 
-
 ## Select event storage configuration
 
-Use `storage` configuration option to specify a connection string and a schema for your event storage.
+Use storage configuration option to select event storage of choice among Azure Sql, Postgres or Sql Server.
 ```csharp title="Program.cs" showLineNumbers
 builder.Services.AddEventStorage(storage =>
 {
-    storage.Schema = "es"; // default is es
-    storage.ConnectionString = builder.Configuration["Connection"];
-});
-```
-
-Select event storage of choice among Azure Sql, Postgres or Sql Server.
-```csharp title="Program.cs" showLineNumbers
-builder.Services.AddEventStorage(storage =>
-{
-    storage.Schema = "es"; // default is es
-    storage.ConnectionString = builder.Configuration["Connection"];
-
     storage.AddEventSource(source =>
     {
-        source.Select(EventStore.PostgresSql);
+        source.Select(EventStore.PostgresSql, connectionString);
     });
 });
 ```
+
+<Warning>
+Ensure connection string is valid. example: `host=localhost;port=5432;username=postgres;password=postgres;database=es`
+</Warning>
 
 ## Create aggregate root with `EventSource<TId>`
 

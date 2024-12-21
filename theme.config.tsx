@@ -92,7 +92,9 @@ export default defineTheme([
             }),
           ]),
           group('Configuration', [
-            link('Colors & theme', gdGetStarted('/config/theming')),
+            link('Event storage', gdGetStarted('/config/eventstorage'), {
+              icon: 'fa6-solid:database'
+            }),
             link('Redirects', gdGetStarted('/config/redirects')),
             link('SEO & Meta tags', gdGetStarted('/config/seo')),
             link('Landing page', gdGetStarted('/config/landing')),
