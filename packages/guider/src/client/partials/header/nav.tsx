@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { makeKey } from 'src/client/utils/make-key';
+import { makeKey } from '../../utils/make-key';
 import type {
   CustomComponentComponent,
   LinkComponent,
