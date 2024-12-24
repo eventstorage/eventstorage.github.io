@@ -81,7 +81,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/pnpm-lock.yaml') }}-
       - name: Build packages
-        run: pnpm -C packages\guider run build
+        run: pnpm -C packages/guider run build
       - name: Build app
         run: pnpm run build
       - name: Upload artifact
