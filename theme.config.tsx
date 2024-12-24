@@ -1,113 +1,137 @@
 import {
-  component,
   defineTheme,
   directory,
   group,
   link,
-  separator,
   site,
+  siteTemplate,
+  social,
   type SiteComponent,
 } from '@neato/guider/theme';
+import { Logo } from 'components/logo';
 
-const siteTemplate = site('docs', {
-  dropdown: [
-    link('Documentation', '/docs/guides', { icon: 'fa6-solid:house' }),
-    link('API reference', '/api-ref'),
-  ],
-  navigation: [
-    link('Documentation', '/docs/guides', { icon: 'fa6-solid:house' }),
-    link('API reference', '/api-ref'),
-    separator(),
-  ],
+const template = siteTemplate({
   github: 'eventstorage/eventstorage',
+  dropdown: [link('v0.0.0-beta.13', '/v0.0.0-beta.13'), link('v0.0.0-beta.12', '/v0.0.0-beta.12')],
+  navigation: [],
+  settings: {
+    colors: {
+      primary: '#A880FF',
+      primaryDarker: '#6C3DD0',
+      primaryLighter: '#D0BAFF',
+    },
+    backgroundPattern: 'flare',
+    logo: () => <Logo />,
+  },
+  contentFooter: {
+    editRepositoryBase: 'https://github.com/eventstorage/eventstorage/tree/main/docs',
+    socials: [
+      social.discord('https://discord.gg/fcGd5pKxWyK'),
+      social.github('https://github.com/eventstorage/eventstorage'),
+    ],
+  },
+  meta: {
+    titleTemplate: '%s - eventstorage',
+    additionalLinkTags: [
+      {
+        rel: 'icon',
+        href: '/favicon.png',
+      },
+    ],
+  },
 });
 
-export default defineTheme([
-  site('docs', {
-    extends: [siteTemplate],
-    meta: () => <></>,
-    contentFooter: {
-      socials: [],
-      text: 'Copyright (c) 2023',
-      editRepositoryBase: 'https://github.com/eventstorage/eventstorage',
-    },
-    pageFooter: {
-      text: 'Made with love <3',
-    },
-    directories: [
-      directory('guides', {
-        sidebar: [
-          link('Guides', '/docs/guides/', {
-            style: 'star',
-            icon: 'fa6-solid:house',
-          }),
-          link('How to?', '/docs/guides/how-to', { style: 'star' }),
-          link('GFM', '/docs/guides/github', {
-            style: 'star',
-            icon: 'radix-icons:github-logo',
-          }),
+const gdGetStarted = (url: string) => `/v0.0.0-beta.13/getting-started${url}`;
+const gdDocs = (url: string) => `/v0.0.0-beta.13/documentation${url}`;
+const gdLearn = (url: string) => `/v0.0.0-beta.13/learning${url}`;
 
-          group('Introduction', [
-            link('Guides', '/docs/guides/'),
-            link('How to?', '/docs/guides/how-to'),
+const starLinks = [
+  link('GitHub', 'https://github.com/eventstorage/eventstorage', {
+    style: 'star',
+    newTab: true,
+    icon: 'akar-icons:github-fill',
+  }),
+  link('Discord', 'https://discord.gg/cGd5pfKxWyK', {
+    style: 'star',
+    newTab: true,
+    icon: 'fa6-brands:discord',
+  }),
+  link('Suggest features', 'https://github.com/eventstorage/eventstorage/issues', {
+    style: 'star',
+    newTab: true,
+    icon: 'streamline:chat-bubble-typing-oval-solid',
+  }),
+];
+
+export default defineTheme([
+  site('main', {
+    extends: [template],
+    directories: [
+      directory('main', {
+        sidebar: [],
+      }),
+    ],
+  }),
+  site('v0.0.0-beta.13', {
+    extends: [template],
+    contentFooter: {
+      text: 'hello man'
+    },
+    tabs: [
+      link('Getting started', '/v0.0.0-beta.13/getting-started'),
+      link('Documentation', '/v0.0.0-beta.13/docs'),
+      link('Learning', '/v0.0.0-beta.13/learn'),
+    ],
+    directories: [
+      directory('getting-started', {
+        sidebar: [
+          ...starLinks,
+          group('Getting started', [
+            link('Installation', gdGetStarted('/getting-started/installation'), {
+              icon: 'fa6-solid:download',
+            }),
+            link('Development', gdGetStarted('/getting-started/development'), {
+              icon: 'icon-park-solid:cpu',
+            }),
           ]),
-          group('Other stuff', [
-            link('Guides', '/docs/guides/'),
-            link('How to?', '/docs/guides/how-to'),
+          group('Configuration', [
+            link('Event storage', gdGetStarted('/config/eventstorage'), {
+              icon: 'fa6-solid:database'
+            }),
+            link('Projections', gdGetStarted('/config/projections'), {
+            icon: 'icon-park-solid:data'
+          }),
+            link('Cheers!!', gdGetStarted('/config/cheers'), {
+              icon: 'icon-park-solid:success'
+            }), 
           ]),
-          separator(),
-          link.nested('Troubleshooting', '/docs/guides/troubleshooting', [
-            link('Guides', '/docs/guides/'),
-            link('How to?', '/docs/guides/how-to'),
+          group('Advanced', [
+            link('Upcoming', gdGetStarted('/advanced/not-yet')),
           ]),
-          link.nested('Troubleshooting 2', [
-            link('Guides', '/docs/guides/'),
-            link('How to?', '/docs/guides/how-to'),
+          group('Deploying', [
+            link('GitHub Pages', gdGetStarted('/deploy/github-pages')),
           ]),
         ],
-        settings: {
-          logo: () => <img src="vercel.svg" width="50" height="50"></img>,
-          colors: {
-            primary: '#50EA8E',
-            primaryDarker: '#1BA965',
-            primaryLighter: '#89FFAA',
-          },
-        },
       }),
-      directory('cli', {
+      directory('documentation', {
         sidebar: [
-          link('Getting started', '/docs/cli/'),
-          link('CLI A', '/docs/cli/cli-a'),
-          link('CLI B', '/docs/cli/cli-b'),
-          link('David Tennant', '/docs/cli/tennant'),
-          component(() => (
-            <div
-              style={{
-                backgroundColor: '#000',
-                padding: 16,
-                borderRadius: 7,
-              }}
-            >
-              Custom component
-            </div>
-          )),
+          ...starLinks,
         ],
       }),
-      directory('misc', {
+      directory('learn', {
         sidebar: [
-          link('The misc', '/docs/misc/'),
-          link('The cure', '/docs/misc/the-cure'),
+          ...starLinks,
         ],
       }),
     ],
   }),
-  site('api-ref', {
-    extends: [siteTemplate],
+  site('v0.0.0-beta.12', {
+    extends: [template],
     directories: [
-      directory('ref', {
+      directory('main', {
         sidebar: [
-          link('The API reference', '/api-ref/'),
-          link('Other info', '/api-ref/other'),
+          ...starLinks
+          
         ],
       }),
     ],
