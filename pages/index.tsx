@@ -13,12 +13,11 @@ export default function LandingPage() {
     <GuiderLayout meta={{ layout: 'page', site: 'main'}}>
       <Hero>
         <Hero.Badge title="v0.0.0-beta.13" to="/v0.0.0-beta.13">
-          Just went out of beta!
-        </Hero.Badge>
-        <Hero.Title>Documentation that looks great out of the box</Hero.Title>
+          we're just went out of beta!
+        </Hero.Badge> 
+        <Hero.Title>Out of the box event storage infrastructure</Hero.Title>
         <Hero.Subtitle>
-          Flexible but beautiful documentation powered by NextJS — easy to write
-          and easier to extend.
+          Flexible but lightweight event sourcing infrastructure with event storage of choice.
         </Hero.Subtitle>
         <Hero.Actions>
           <Button to="/v0.0.0-beta.13">Get started</Button>
@@ -28,17 +27,17 @@ export default function LandingPage() {
         </Hero.Actions>
       </Hero>
       <CardGrid>
-        <Card icon="material-symbols:edit-document" title="Focus on writing">
-          Effortlessly create beautiful documentation sites using Markdown or
-          MDX files.
+        <Card icon="fa6-solid:database" title="Event sourced infrastructure">
+          Born out of event sourcing. eventstorage offers enterprise-grade event sourcing to run fully
+          event-driven apps.
         </Card>
-        <Card icon="mdi:puzzle" title="Unopinionated">
-          Guider doesn't make assumptions about your site. Use it by itself or
-          include it as part of a larger project.
+        <Card icon="fa6-solid:code" title="Event storage of choice">
+          es allows selecting event storage of choice and projection source as event storage or high-performance
+          Redis powered by innovative C#.
         </Card>
-        <Card icon="solar:pallete-2-bold" title="Themable to the core">
-          Comes out the box with a ready-to-go theme, but can easily be made to
-          look exactly like what you have envisioned.
+        <Card icon="icon-park-solid:cpu" title="High-performance storage">
+          High-performance event storage by placing no layer of abstraction over
+          event store. we denormalize and run lightning-fast plain sql.
         </Card>
       </CardGrid>
     </GuiderLayout>

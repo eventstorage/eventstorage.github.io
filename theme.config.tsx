@@ -74,6 +74,9 @@ export default defineTheme([
   }),
   site('v0.0.0-beta.13', {
     extends: [template],
+    contentFooter: {
+      text: 'hello man'
+    },
     tabs: [
       link('Getting started', '/v0.0.0-beta.13/getting-started'),
       link('Documentation', '/v0.0.0-beta.13/docs'),

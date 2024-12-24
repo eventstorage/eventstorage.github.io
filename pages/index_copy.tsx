@@ -11,31 +11,18 @@ interface Project {
 
 export default function LandingPage() {
   const projects: Project[] = [
-    {
-      title: '@neato/guider',
-      description: 'Flexible documentation that looks good out of the box.',
-      href: '/docs/guider',
-      icon: 'ic:round-menu-book',
-    },
-    {
-      title: '@neato/config',
-      description:
-        'NodeJS configuration loader with strict typing and autocomplete.',
-      href: '/docs/config',
-      icon: 'material-symbols:settings-heart-rounded',
-    },]
+  ]
 
   return (
     <GuiderLayout meta={{ layout: 'page' }}>
       <Home.Container>
         <Home.Title>
-          NeatoJS — A collection of libraries made to simplify
+        Event sourcing infrastructure made easy
         </Home.Title>
         <Home.Subtitle>
-          Tools that follow the philosophy of doing only one thing, and doing it
-          right!
+        Flexible but lightweight event sourcing infrastructure with event storage of choice.
         </Home.Subtitle>
-        <Hero.Badge title="v1.0.0-beta.13" to="/docs/guider/guides">
+        <Hero.Badge title="v1.0.0-beta.13" to="/docs">
           Just went out of beta!
         </Hero.Badge>
         <HomeCardContainer>
