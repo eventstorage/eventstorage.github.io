@@ -13,7 +13,7 @@ export function SearchButton(props: { onClick?: () => void }) {
       />
       <span className="gd-flex-1 gd-hidden md:gd-inline-block">Search</span>
       <span className="gd-text-right gd-text-xs gd-hidden md:gd-inline-block">
-        {/* Ctrl K */}
+        Ctrl K
       </span>
     </button>
   );

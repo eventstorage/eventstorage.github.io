@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
-import { Icon } from '@neato/guider/client';
 import Link from 'next/link.js';
+import { Icon } from '@neato/guider/client';
 
 function Card(props: {
   children?: ReactNode;

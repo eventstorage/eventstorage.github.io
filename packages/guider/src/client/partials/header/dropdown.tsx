@@ -1,7 +1,7 @@
 import { Menu, Transition } from '@headlessui/react';
 import { Fragment, useEffect, useMemo } from 'react';
 import classNames from 'classnames';
-import { makeKey } from '../../utils/make-key';
+import { makeKey } from 'src/client/utils/make-key';
 import ActiveLink, {
   useAreRoutesActive,
 } from '../../components/utils/activelink';
@@ -102,7 +102,7 @@ export function HeaderDropdown(props: { dropdown: DropdownChildren[] }) {
             })}
           >
             <span className="gd-mr-2">
-              {activeItem?.title ?? 'Select version'}
+              {activeItem?.title ?? 'Select site'}
             </span>
             <Icon icon="flowbite:chevron-sort-solid" className="gd-text-text" />
             <UpdateHead active={open} />

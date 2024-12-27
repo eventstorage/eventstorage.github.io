@@ -15,6 +15,8 @@ export type KeyableComponets =
 
 export function makeKey(index: number, item: KeyableComponets): string {
   const link =
-    item.type === 'link' || item.type === 'nested-link' ? item.to ?? '#' : '#';
+    item.type === 'link' || item.type === 'nested-link'
+      ? (item.to ?? '#')
+      : '#';
   return `${index}-${link}-${item.type}`;
 }
