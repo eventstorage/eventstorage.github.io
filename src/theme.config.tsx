@@ -9,6 +9,7 @@ import {
   type SiteComponent,
 } from '@neato/guider/theme';
 import { Logo } from 'components/logo';
+import { ghPrefix } from './components/gh-prefix';
 
 const template = siteTemplate({
   github: 'eventstorage/eventstorage',
@@ -39,7 +40,7 @@ const template = siteTemplate({
     additionalLinkTags: [
       {
         rel: 'icon',
-        href: '/favicon.ico',
+        href: `${ghPrefix()}/favicon.ico`,
       },
     ],
   },
