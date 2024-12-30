@@ -1,4 +1,10 @@
-import { Button, GuiderLayout, Hero, Card, CardGrid } from '@neato/guider/client';
+import {
+  Button,
+  GuiderLayout,
+  Hero,
+  Card,
+  CardGrid,
+} from '@neato/guider/client';
 import { Home } from '../components/home';
 import { HomeCard, HomeCardContainer } from '../components/home-card';
 
@@ -10,24 +16,25 @@ interface Project {
 }
 
 export default function LandingPage() {
-  const projects: Project[] = [
-  ]
+  const projects: Project[] = [];
 
   return (
     <GuiderLayout meta={{ layout: 'page' }}>
       <Home.Container>
-        <Home.Title>
-        Event sourcing infrastructure made easy
-        </Home.Title>
+        <Home.Title>Event sourcing infrastructure made easy</Home.Title>
         <Home.Subtitle>
-        Flexible but lightweight event sourcing infrastructure with event storage of choice.
+          Flexible but lightweight event sourcing infrastructure with event
+          storage of choice.
         </Home.Subtitle>
         <Hero.Badge title="v1.0.0-beta.13" to="/docs">
           Just went out of beta!
         </Hero.Badge>
         <HomeCardContainer>
           <Button to="/v0.0.0-beta.13">Get started</Button>
-          <Button to="https://github.com/eventstorage/eventstorage" type="secondary">
+          <Button
+            to="https://github.com/eventstorage/eventstorage"
+            type="secondary"
+          >
             View on GitHub
           </Button>
         </HomeCardContainer>

@@ -1,7 +1,7 @@
-import type { ThemeColorStoreColors } from '@neato/guider/client';
-import { useGuiderTheme } from '@neato/guider/client';
 import { useCallback, useEffect, useState } from 'react';
 import Color from 'color';
+import type { ThemeColorStoreColors } from '@neato/guider/client';
+import { useGuiderTheme } from '@neato/guider/client';
 import type { HsbColor } from './color-select';
 import { hsbToColorToString } from './color-select';
 

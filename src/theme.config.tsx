@@ -12,7 +12,10 @@ import { Logo } from 'components/logo';
 
 const template = siteTemplate({
   github: 'eventstorage/eventstorage',
-  dropdown: [link('v0.0.0-beta.13', '/v0.0.0-beta.13'), link('v0.0.0-beta.12', '/v0.0.0-beta.12')],
+  dropdown: [
+    link('v0.0.0-beta.13', '/v0.0.0-beta.13'),
+    link('v0.0.0-beta.12', '/v0.0.0-beta.12'),
+  ],
   navigation: [],
   settings: {
     colors: {
@@ -24,7 +27,8 @@ const template = siteTemplate({
     logo: () => <Logo />,
   },
   contentFooter: {
-    editRepositoryBase: 'https://github.com/eventstorage/eventstorage/tree/main/docs',
+    editRepositoryBase:
+      'https://github.com/eventstorage/eventstorage/tree/main/docs',
     socials: [
       social.discord('https://discord.gg/fcGd5pKxWyK'),
       social.github('https://github.com/eventstorage/eventstorage'),
@@ -35,7 +39,7 @@ const template = siteTemplate({
     additionalLinkTags: [
       {
         rel: 'icon',
-        href: '/favicon.png',
+        href: '/favicon.ico',
       },
     ],
   },
@@ -56,11 +60,15 @@ const starLinks = [
     newTab: true,
     icon: 'fa6-brands:discord',
   }),
-  link('Suggest features', 'https://github.com/eventstorage/eventstorage/issues', {
-    style: 'star',
-    newTab: true,
-    icon: 'streamline:chat-bubble-typing-oval-solid',
-  }),
+  link(
+    'Suggest features',
+    'https://github.com/eventstorage/eventstorage/issues',
+    {
+      style: 'star',
+      newTab: true,
+      icon: 'streamline:chat-bubble-typing-oval-solid',
+    },
+  ),
 ];
 
 export default defineTheme([
@@ -75,7 +83,7 @@ export default defineTheme([
   site('v0.0.0-beta.13', {
     extends: [template],
     contentFooter: {
-      text: 'hello man'
+      text: 'hello man',
     },
     tabs: [
       link('Getting started', '/v0.0.0-beta.13/getting-started'),
@@ -87,23 +95,27 @@ export default defineTheme([
         sidebar: [
           ...starLinks,
           group('Getting started', [
-            link('Installation', gdGetStarted('/getting-started/installation'), {
-              icon: 'fa6-solid:download',
-            }),
+            link(
+              'Installation',
+              gdGetStarted('/getting-started/installation'),
+              {
+                icon: 'fa6-solid:download',
+              },
+            ),
             link('Development', gdGetStarted('/getting-started/development'), {
               icon: 'icon-park-solid:cpu',
             }),
           ]),
           group('Configuration', [
             link('Event storage', gdGetStarted('/config/eventstorage'), {
-              icon: 'fa6-solid:database'
+              icon: 'fa6-solid:database',
             }),
             link('Projections', gdGetStarted('/config/projections'), {
-            icon: 'icon-park-solid:data'
-          }),
+              icon: 'icon-park-solid:data',
+            }),
             link('Cheers!!', gdGetStarted('/config/cheers'), {
-              icon: 'icon-park-solid:success'
-            }), 
+              icon: 'icon-park-solid:success',
+            }),
           ]),
           group('Advanced', [
             link('Upcoming', gdGetStarted('/advanced/not-yet')),
@@ -114,14 +126,10 @@ export default defineTheme([
         ],
       }),
       directory('documentation', {
-        sidebar: [
-          ...starLinks,
-        ],
+        sidebar: [...starLinks],
       }),
       directory('learn', {
-        sidebar: [
-          ...starLinks,
-        ],
+        sidebar: [...starLinks],
       }),
     ],
   }),
@@ -129,10 +137,7 @@ export default defineTheme([
     extends: [template],
     directories: [
       directory('main', {
-        sidebar: [
-          ...starLinks
-          
-        ],
+        sidebar: [...starLinks],
       }),
     ],
   }),

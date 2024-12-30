@@ -1,5 +1,5 @@
-import { GuiderLayout } from '@neato/guider/client';
 import { useMemo, useState } from 'react';
+import { GuiderLayout } from '@neato/guider/client';
 import { Showcase } from 'components/showcase-layout';
 import type { ShowcaseTag, ShowcaseType } from 'components/showcase-card';
 import { ShowcaseCard, ShowcaseCardContainer } from 'components/showcase-card';
