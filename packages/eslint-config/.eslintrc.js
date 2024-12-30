@@ -18,7 +18,7 @@ module.exports = {
     },
   },
   rules: {
-    'prettier/prettier': ['off', {}, prettierConfig],
+    'prettier/prettier': ['warning', {}, prettierConfig],
     'import/no-default-export': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-unsafe-assignment': 'off',
