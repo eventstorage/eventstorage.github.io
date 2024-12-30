@@ -39,7 +39,7 @@ const template = siteTemplate({
     additionalLinkTags: [
       {
         rel: 'icon',
-        href: '/favicon.png',
+        href: '/favicon.ico',
       },
     ],
   },
