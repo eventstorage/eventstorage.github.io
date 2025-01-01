@@ -29,12 +29,12 @@ jobs:
       run: cd packages/guider && pnpm run build
 
     - name: Build app
-      run: cd src && pnpm run build
+      run: pnpm run build
 
     - name: Upload
       uses: actions/upload-pages-artifact@v3
       with:
-        path: src/out
+        path: ./out
 
   deploy:
     needs: build

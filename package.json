@@ -1,6 +1,6 @@
 {
-  "name": "eventstorage-docs",
-  "description": "eventstorage documentation",
+  "name": "docs",
+  "description": "Documentation for neatojs",
   "private": true,
   "version": "0.0.0",
   "eslintConfig": {
@@ -12,7 +12,7 @@
   "prettier": "@repo/prettier-config",
   "scripts": {
     "start": "next start",
-    "build": "next build && touch out/.nojekyll",
+    "build": "next build",
     "dev": "next",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",

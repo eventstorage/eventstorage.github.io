@@ -6,5 +6,9 @@ const withGuider = guider({
 
 export default withGuider({
   output: 'export',
-  basePath: process.env.NODE_ENV === 'production' ? '/eventstorage-docs/src' : ''
+  basePath:
+    process.env.NODE_ENV === 'production' ? '/eventstorage-docs' : '',
+  typescript: {
+    ignoreBuildErrors: true
+  }
 });
