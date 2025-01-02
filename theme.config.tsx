@@ -40,7 +40,7 @@ const template = siteTemplate({
     additionalLinkTags: [
       {
         rel: 'icon',
-        href: 'favicon.ico',
+        href: `${ghPrefix()}/favicon.ico`,
       },
     ],
   },
