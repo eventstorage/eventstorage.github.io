@@ -53,7 +53,7 @@ export function ContentFooterInternal() {
             rel="noopener noreferrer"
             className="hover:gd-opacity-50"
           >
-            Powered by Guider
+            {/* Powered by Guider */} eventstorage
           </Link>
         </div>
       </div>

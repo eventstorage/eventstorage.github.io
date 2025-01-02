@@ -84,7 +84,7 @@ export default defineTheme([
   site('v0.0.0-beta.13', {
     extends: [template],
     contentFooter: {
-      text: 'hello man',
+      text: 'Copyright © 2025',
     },
     tabs: [
       link('Getting started', '/v0.0.0-beta.13/getting-started'),
