@@ -32,15 +32,15 @@ export default function LandingPage() {
       <CardGrid>
         <Card icon="fa6-solid:database" title="Event sourced infrastructure">
           Born out of event sourcing. eventstorage offers enterprise-grade event
-          sourcing to run fully event-driven apps.
+          sourcing to run asynchronous fully event-driven apps.
         </Card>
-        <Card icon="fa6-solid:code" title="Event storage of choice">
-          es allows selecting event storage of choice and projection source as
-          event storage or high-performance Redis powered by innovative C#.
+        <Card icon="fa6-solid:code" title="Configuration of choice">
+          es allows selecting event storage of choice and multi projection modes
+          with high-performance Redis as projection source powered by innovative C#.
         </Card>
         <Card icon="icon-park-solid:cpu" title="High-performance storage">
           High-performance event storage by placing no layer of abstraction over
-          event store. we denormalize and run lightning-fast plain sql.
+          event store clients. we denormalize and run lightning-fast plain Sql.
         </Card>
       </CardGrid>
     </GuiderLayout>

@@ -22,7 +22,7 @@ export function GithubDisplay(props: GithubDisplayProps) {
         className="gd-mr-3 gd-text-xl gd-text-textHeading"
       />
       <div className="gd-flex-1 gd-text-sm">
-        <p className="gd-text-textHeading -gd-mb-1">{name}</p>
+        {/* <p className="gd-text-textHeading -gd-mb-1">{name}</p> */}
         <p className="gd-flex gd-items-center gd-gap-3">
           <span className="gd-space-x-1 gd-flex gd-items-center">
             <Icon inline icon="mingcute:star-line" />

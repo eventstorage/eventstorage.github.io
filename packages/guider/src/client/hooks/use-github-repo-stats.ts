@@ -34,6 +34,6 @@ export function useGithubRepoStats(org: string, repo: string) {
 
   return {
     stats,
-    name: stats ? stats.name : `${org}/${repo}`,
+    name: stats ? stats.name : `${org}`,
   };
 }
