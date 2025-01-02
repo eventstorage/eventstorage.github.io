@@ -121,9 +121,6 @@ export default defineTheme([
           group('Advanced', [
             link('Upcoming', gdGetStarted('/advanced/not-yet')),
           ]),
-          group('Deploying', [
-            link('GitHub Pages', gdGetStarted('/deploy/github-pages')),
-          ]),
         ],
       }),
       directory('documentation', {
