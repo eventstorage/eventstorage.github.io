@@ -7,7 +7,7 @@ const withGuider = guider({
 export default withGuider({
   output: 'export',
   basePath:
-    process.env.NODE_ENV === 'production' ? '/eventstorage.github.io' : '',
+    process.env.NODE_ENV === 'production' ? '' : '',
   typescript: {
     ignoreBuildErrors: true
   }
